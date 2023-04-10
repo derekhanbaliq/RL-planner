@@ -1,4 +1,5 @@
 # RL-planner
+
 RL-based planner dev in f1tenth gym env.
 
 Development is based on the [repository of the F1TENTH Gym environment](https://github.com/f1tenth/f1tenth_gym). 
@@ -16,6 +17,8 @@ conda activate f110_rl-planner  # activate the environment
 pip install -e .  # install the dependencies for F1TENTH gym.
 pip install -r requirements.txt  # install other dependencies
 ```
+
+For virtualenv and docker installation, please check original repo of f1tenth_gym. 
 
 ## Usage
 

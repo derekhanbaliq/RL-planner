@@ -27,10 +27,10 @@ class PurePursuit:
         self.waypoints = np.array([waypoints.x, waypoints.y]).T
 
         self.numWaypoints = self.waypoints.shape[0]
-        self.ref_speed = waypoints.v * 0.6
+        self.ref_speed = waypoints.v * 0.06 #0.6
 
         self.L = 2.2
-        self.steering_gain = 0.45
+        self.steering_gain = 0.1 #0.45
 
     def control(self, obs):
 

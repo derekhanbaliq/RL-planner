@@ -41,8 +41,14 @@ def main():
     lap_time = 0.0
 
     while not done:
+        # TODO: get the current waypoint -> RL planner -> new waypoints
+        # wp = controller._get_current_waypoint(controller.waypoints, 5, position, pose_theta)
+        
         speed, steering = controller.plan(obs['poses_x'][0], obs['poses_y'][0], obs['poses_theta'][0], work['tlad'],
                                           work['vgain'])  # planner calculate the speed & steering angle
+
+        # plan() <-- lidar, waypoint [T],
+
         print("steering = {}, speed = {}".format(round(steering, 5), speed))
 
         obs, time_step, done, _ = env.step(np.array([[steering, speed]]))

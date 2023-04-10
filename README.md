@@ -1,4 +1,4 @@
-# RL_planner
+# RL-planner
 RL-based planner dev in f1tenth gym env.
 
 Development is based on the [repository of the F1TENTH Gym environment](https://github.com/f1tenth/f1tenth_gym). 

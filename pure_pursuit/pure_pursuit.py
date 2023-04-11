@@ -4,18 +4,11 @@ import os
 
 class Waypoint:
     def __init__(self, map_name, csv_data=None):
-        if map_name == 'Spielberg' or map_name == 'MoscowRaceway' or map_name == 'Catalunya':
-            self.x = csv_data[:, 1]
-            self.y = csv_data[:, 2]
-            self.v = csv_data[:, 5]
-            self.θ = csv_data[:, 3]  # coordinate matters!
-            self.γ = csv_data[:, 4]
-        elif map_name == 'example' or map_name == 'icra':
-            self.x = csv_data[:, 1]
-            self.y = csv_data[:, 2]
-            self.v = csv_data[:, 5]
-            self.θ = csv_data[:, 3] + np.pi / 2  # coordinate matters!
-            self.γ = csv_data[:, 4]
+        self.x = csv_data[:, 1]
+        self.y = csv_data[:, 2]
+        self.v = csv_data[:, 5]
+        self.θ = csv_data[:, 3]  # coordinate matters!
+        self.γ = csv_data[:, 4]
 
 
 class PurePursuit:
@@ -28,10 +21,9 @@ class PurePursuit:
         self.waypoints = np.array([waypoints.x, waypoints.y]).T
         self.numWaypoints = self.waypoints.shape[0]
         self.ref_speed = waypoints.v
-        self.ref_theta = waypoints.θ
 
         self.L = 1.5
-        self.steering_gain = 0.5
+        # self.steering_gain = 0.5
 
     def control(self, obs):
         # Get current pose
@@ -42,23 +34,20 @@ class PurePursuit:
         # Find closest waypoint to where we are
         self.distances = distance.cdist(self.currPos, self.waypoints, 'euclidean').reshape((self.numWaypoints))
         self.closest_index = np.argmin(self.distances)
-        self.closestPoint = self.waypoints[self.closest_index]
 
         # Find target point
         targetPoint, target_point_index = self.get_closest_point_beyond_lookahead_dist(self.L)
 
-        waypoint_y = np.dot(np.array([np.sin(-obs['poses_theta'][0]), np.cos(-obs['poses_theta'][0])]), targetPoint - np.array([self.currX, self.currY]))
-        # speed = self.ref_speed[target_point_index]
-        gamma = self.steering_gain * 2.0 * waypoint_y / self.L ** 2
-        steering_angle = gamma
-
         # calculate curvature/steering angle
-        # y = targetPoint[1]
-        # gamma = self.steering_gain * (2 * y / self.L**2)
-        # steering_angle = np.clip(gamma, -0.35, 0.35)
+        waypoint_y = np.dot(np.array([np.sin(-obs['poses_theta'][0]), np.cos(-obs['poses_theta'][0])]), targetPoint - np.array([self.currX, self.currY]))
+        # gamma = self.steering_gain * 2.0 * waypoint_y / self.L ** 2
+        # steering_angle = gamma
+        radius = 1 / (2.0 * waypoint_y / self.L ** 2)
+        steering_angle = np.arctan(0.33 / radius)
+        steering_angle = np.clip(steering_angle, -0.35, 0.35)
 
         # calculate speed
-        speed = self.ref_speed[self.closest_index]
+        speed = self.ref_speed[target_point_index]
 
         print("steering = {}, speed = {}".format(round(steering_angle, 2), round(speed, 2)))
 

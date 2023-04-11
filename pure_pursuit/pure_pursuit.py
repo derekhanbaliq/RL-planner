@@ -2,12 +2,13 @@ import numpy as np
 from scipy.spatial import distance
 import os
 
+
 class Waypoint:
-    def __init__(self, map_name, csv_data=None):
+    def __init__(self, csv_data=None):
         self.x = csv_data[:, 1]
         self.y = csv_data[:, 2]
         self.v = csv_data[:, 5]
-        self.θ = csv_data[:, 3]  # coordinate matters!
+        self.θ = csv_data[:, 3]  # coordinate matters! -- but pp doesn't use θ
         self.γ = csv_data[:, 4]
 
 
@@ -15,6 +16,7 @@ class PurePursuit:
     """ 
     Implement Pure Pursuit on the car
     """
+
     def __init__(self, waypoints):
         self.is_clockwise = False
 
@@ -23,7 +25,7 @@ class PurePursuit:
         self.ref_speed = waypoints.v
 
         self.L = 1.5
-        # self.steering_gain = 0.5
+        self.steering_gain = 0.5
 
     def control(self, obs):
         # Get current pose
@@ -38,25 +40,24 @@ class PurePursuit:
         # Find target point
         targetPoint, target_point_index = self.get_closest_point_beyond_lookahead_dist(self.L)
 
-        # calculate curvature/steering angle
-        waypoint_y = np.dot(np.array([np.sin(-obs['poses_theta'][0]), np.cos(-obs['poses_theta'][0])]), targetPoint - np.array([self.currX, self.currY]))
-        # gamma = self.steering_gain * 2.0 * waypoint_y / self.L ** 2
-        # steering_angle = gamma
-        radius = 1 / (2.0 * waypoint_y / self.L ** 2)
-        steering_angle = np.arctan(0.33 / radius)
+        # calculate steering angle / curvature
+        waypoint_y = np.dot(np.array([np.sin(-obs['poses_theta'][0]), np.cos(-obs['poses_theta'][0])]),
+                            targetPoint - np.array([self.currX, self.currY]))
+        gamma = self.steering_gain * 2.0 * waypoint_y / self.L ** 2
+        steering_angle = gamma
+        # radius = 1 / (2.0 * waypoint_y / self.L ** 2)
+        # steering_angle = np.arctan(0.33 / radius)  # Billy's method, but it also involves tricky fixing
         steering_angle = np.clip(steering_angle, -0.35, 0.35)
 
         # calculate speed
         speed = self.ref_speed[target_point_index]
 
-        print("steering = {}, speed = {}".format(round(steering_angle, 2), round(speed, 2)))
-
         return speed, steering_angle
-        
+
     def get_closest_point_beyond_lookahead_dist(self, threshold):
         point_index = self.closest_index
         dist = self.distances[point_index]
-        
+
         while dist < threshold:
             if self.is_clockwise:
                 point_index -= 1

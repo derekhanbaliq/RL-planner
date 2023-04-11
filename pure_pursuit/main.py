@@ -12,13 +12,13 @@ def main():
     method_name = 'pure_pursuit'
 
     # load map & yaml
-    map_name = 'Catalunya'  # Spielberg, example, MoscowRaceway, Catalunya
+    map_name = 'Catalunya'  # Spielberg, example, MoscowRaceway, Catalunya -- need further tuning
     map_path = os.path.abspath(os.path.join('..', 'maps', map_name))
     yaml_config = yaml.load(open(map_path + '/' + map_name + '_map.yaml'), Loader=yaml.FullLoader)
 
     # load waypoints
     csv_data = np.loadtxt(map_path + '/' + map_name + '_raceline.csv', delimiter=';', skiprows=0)
-    waypoints = Waypoint(map_name, csv_data)
+    waypoints = Waypoint(csv_data)
 
     # load controller
     # controller = PurePursuitController(conf, 0.33)

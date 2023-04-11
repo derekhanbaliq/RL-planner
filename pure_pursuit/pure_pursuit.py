@@ -23,38 +23,39 @@ class PurePursuit:
     Implement Pure Pursuit on the car
     """
     def __init__(self, waypoints):
-        self.is_clockwise = True
+        self.is_clockwise = False
+
         self.waypoints = np.array([waypoints.x, waypoints.y]).T
-
         self.numWaypoints = self.waypoints.shape[0]
-        self.ref_speed = waypoints.v * 0.06 #0.6
+        self.ref_speed = waypoints.v
+        self.ref_theta = waypoints.θ
 
-        self.L = 2.2
-        self.steering_gain = 0.1 #0.45
+        self.L = 1.5
+        self.steering_gain = 0.5
 
     def control(self, obs):
-
-        # ['poses_x'][0], obs['poses_y'][0], obs['poses_theta'][0], work['tlad'], work['vgain']
-        
         # Get current pose
         self.currX = obs['poses_x'][0]
         self.currY = obs['poses_y'][0]
         self.currPos = np.array([self.currX, self.currY]).reshape((1, 2))
 
-        print(self.currPos.shape)
-        print(self.waypoints.shape)
         # Find closest waypoint to where we are
         self.distances = distance.cdist(self.currPos, self.waypoints, 'euclidean').reshape((self.numWaypoints))
         self.closest_index = np.argmin(self.distances)
         self.closestPoint = self.waypoints[self.closest_index]
 
         # Find target point
-        targetPoint = self.get_closest_point_beyond_lookahead_dist(self.L)
-        
+        targetPoint, target_point_index = self.get_closest_point_beyond_lookahead_dist(self.L)
+
+        waypoint_y = np.dot(np.array([np.sin(-obs['poses_theta'][0]), np.cos(-obs['poses_theta'][0])]), targetPoint - np.array([self.currX, self.currY]))
+        # speed = self.ref_speed[target_point_index]
+        gamma = self.steering_gain * 2.0 * waypoint_y / self.L ** 2
+        steering_angle = gamma
+
         # calculate curvature/steering angle
-        y = targetPoint[1]
-        gamma = self.steering_gain * (2 * y / self.L**2)
-        steering_angle = np.clip(gamma, -0.35, 0.35)
+        # y = targetPoint[1]
+        # gamma = self.steering_gain * (2 * y / self.L**2)
+        # steering_angle = np.clip(gamma, -0.35, 0.35)
 
         # calculate speed
         speed = self.ref_speed[self.closest_index]
@@ -81,4 +82,4 @@ class PurePursuit:
 
         point = self.waypoints[point_index]
 
-        return point
+        return point, point_index

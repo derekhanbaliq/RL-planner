@@ -159,7 +159,7 @@ class F110Env(gym.Env):
         self.poses_theta = []
         self.collisions = np.zeros((self.num_agents, ))
         # TODO: collision_idx not used yet
-        # self.collision_idx = -1 * np.ones((self.num_agents, ))
+        self.collision_idx = -1 * np.ones((self.num_agents, ))
 
         # loop completion
         self.near_start = True

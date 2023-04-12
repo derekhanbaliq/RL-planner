@@ -8,7 +8,7 @@ class Waypoint:
         self.x = csv_data[:, 1]
         self.y = csv_data[:, 2]
         self.v = csv_data[:, 5]
-        self.θ = csv_data[:, 3]  # coordinate matters! -- but pp doesn't use θ
+        self.θ = csv_data[:, 3]  # coordinate matters!f -- but pp doesn't use θ
         self.γ = csv_data[:, 4]
 
 
@@ -27,10 +27,10 @@ class PurePursuit:
         self.L = 1.5
         self.steering_gain = 0.5
 
-    def control(self, obs):
+    def control(self, obs, agent):
         # Get current pose
-        self.currX = obs['poses_x'][0]
-        self.currY = obs['poses_y'][0]
+        self.currX = obs['poses_x'][agent - 1]
+        self.currY = obs['poses_y'][agent - 1]
         self.currPos = np.array([self.currX, self.currY]).reshape((1, 2))
 
         # Find closest waypoint to where we are
@@ -41,7 +41,7 @@ class PurePursuit:
         targetPoint, target_point_index = self.get_closest_point_beyond_lookahead_dist(self.L)
 
         # calculate steering angle / curvature
-        waypoint_y = np.dot(np.array([np.sin(-obs['poses_theta'][0]), np.cos(-obs['poses_theta'][0])]),
+        waypoint_y = np.dot(np.array([np.sin(-obs['poses_theta'][agent - 1]), np.cos(-obs['poses_theta'][agent - 1])]),
                             targetPoint - np.array([self.currX, self.currY]))
         gamma = self.steering_gain * 2.0 * waypoint_y / self.L ** 2
         steering_angle = gamma

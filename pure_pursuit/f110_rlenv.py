@@ -100,5 +100,5 @@ class F110Env_Continuous_Planner(gym.Env):
         obs[-2:, :] = targetPoint.reshape(-1, 1)
         return obs
     
-    def render(self, mode, **kwargs)
+    def render(self, mode, **kwargs):
         self.f110.render(mode)

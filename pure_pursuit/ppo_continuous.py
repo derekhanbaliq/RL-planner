@@ -232,7 +232,7 @@ if __name__ == "__main__":
             next_obs, reward, done, infos = envs.step(action.cpu().numpy())
             rewards[step] = torch.tensor(reward).to(device).view(-1)
             next_obs, next_done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
-            envs.envs[0].render(mode='human_fast')
+            # envs.envs[0].render(mode='human_fast')
 
             # Only print when at least 1 env is done
             # if "final_info" not in infos:

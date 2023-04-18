@@ -27,6 +27,34 @@ class PurePursuit:
         self.L = 1.5
         self.steering_gain = 0.5
 
+    def control_to_point(self, obs, targetPoint, target_point_index, agent):
+        waypoint_y = np.dot(np.array([np.sin(-obs['poses_theta'][agent - 1]), np.cos(-obs['poses_theta'][agent - 1])]),
+                            targetPoint - np.array([self.currX, self.currY]))
+        gamma = self.steering_gain * 2.0 * waypoint_y / self.L ** 2
+        steering_angle = gamma
+        # radius = 1 / (2.0 * waypoint_y / self.L ** 2)
+        # steering_angle = np.arctan(0.33 / radius)  # Billy's method, but it also involves tricky fixing
+        steering_angle = np.clip(steering_angle, -0.35, 0.35)
+
+        # calculate speed
+        speed = self.ref_speed[target_point_index]
+
+        return speed, steering_angle
+    
+    def get_target_waypoint(self, obs, agent):
+        # Get current pose
+        self.currX = obs['poses_x'][agent - 1]
+        self.currY = obs['poses_y'][agent - 1]
+        self.currPos = np.array([self.currX, self.currY]).reshape((1, 2))
+
+        # Find closest waypoint to where we are
+        self.distances = distance.cdist(self.currPos, self.waypoints, 'euclidean').reshape((self.numWaypoints))
+        self.closest_index = np.argmin(self.distances)
+
+        # Find target point
+        targetPoint, target_point_index = self.get_closest_point_beyond_lookahead_dist(self.L)
+        return targetPoint, target_point_index
+
     def control(self, obs, agent):
         # Get current pose
         self.currX = obs['poses_x'][agent - 1]

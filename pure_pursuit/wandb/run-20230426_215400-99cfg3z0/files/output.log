@@ -1,0 +1,1185 @@
+/home/oem/.pyenv/versions/rl-planner/lib/python3.8/site-packages/wandb/sdk/lib/import_hooks.py:243: DeprecationWarning: Deprecated since Python 3.4. Use importlib.util.find_spec() instead.
+  loader = importlib.find_loader(fullname, path)
+/home/oem/Documents/School/ESE_615/RL-planner/gym/f110_gym/envs/base_classes.py:93: UserWarning: Chosen integrator is RK4. This is different from previous versions of the gym.
+  warnings.warn(f"Chosen integrator is RK4. This is different from previous versions of the gym.")
+/home/oem/.pyenv/versions/rl-planner/lib/python3.8/site-packages/gym/spaces/box.py:84: UserWarning: [33mWARN: Box bound precision lowered by casting to float32
+  logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+/home/oem/.pyenv/versions/rl-planner/lib/python3.8/site-packages/gym/core.py:172: DeprecationWarning: [33mWARN: Function `env.seed(seed)` is marked as deprecated and will be removed in the future. Please use `env.reset(seed=seed) instead.
+  deprecation(
+/home/oem/.pyenv/versions/rl-planner/lib/python3.8/site-packages/gym/core.py:172: DeprecationWarning: [33mWARN: Function `env.seed(seed)` is marked as deprecated and will be removed in the future. Please use `env.reset(seed=seed) instead.
+  deprecation(
+reset
+reset
+reset
+reset
+reset
+reset
+global_step=236, episodic_return=-1.4100003242492676
+global_step=236, episodic_return=-1.4100003242492676
+reset
+global_step=472, episodic_return=-1.4100003242492676
+reset
+global_step=488, episodic_return=-0.7800008058547974
+reset
+global_step=604, episodic_return=-0.4900010824203491
+reset
+global_step=708, episodic_return=-1.4100003242492676
+reset
+global_step=768, episodic_return=-1.3000004291534424
+reset
+global_step=840, episodic_return=-1.4100003242492676
+reset
+global_step=860, episodic_return=-0.44000113010406494
+reset
+global_step=944, episodic_return=-1.4100003242492676
+reset
+global_step=1000, episodic_return=-1.4200003147125244
+reset
+global_step=1076, episodic_return=-1.4100003242492676
+reset
+global_step=1096, episodic_return=-1.4100003242492676
+reset
+global_step=1180, episodic_return=-1.4100003242492676
+reset
+global_step=1232, episodic_return=-1.4200003147125244
+reset
+global_step=1312, episodic_return=-1.4100003242492676
+reset
+global_step=1416, episodic_return=-1.4100003242492676
+reset
+global_step=1464, episodic_return=-1.4200003147125244
+reset
+global_step=1548, episodic_return=-1.4100003242492676
+reset
+global_step=1644, episodic_return=-0.6300009489059448
+reset
+global_step=1652, episodic_return=-1.4100003242492676
+reset
+global_step=1696, episodic_return=-1.4200003147125244
+reset
+global_step=1784, episodic_return=-1.4100003242492676
+reset
+global_step=1888, episodic_return=-1.4100003242492676
+reset
+global_step=1928, episodic_return=-1.4200003147125244
+reset
+global_step=2020, episodic_return=-1.4100003242492676
+reset
+global_step=2124, episodic_return=-1.4100003242492676
+reset
+global_step=2256, episodic_return=-1.4100003242492676
+reset
+global_step=2312, episodic_return=-1.0400006771087646
+reset
+global_step=2360, episodic_return=-1.4100003242492676
+reset
+global_step=2492, episodic_return=-1.4100003242492676
+reset
+global_step=2548, episodic_return=-1.4100003242492676
+reset
+global_step=2596, episodic_return=-1.4100003242492676
+reset
+global_step=2728, episodic_return=-1.4100003242492676
+reset
+global_step=2784, episodic_return=-1.4100003242492676
+reset
+global_step=2832, episodic_return=-1.4100003242492676
+reset
+global_step=2964, episodic_return=-1.4100003242492676
+reset
+global_step=3012, episodic_return=1.419997215270996
+reset
+global_step=3020, episodic_return=-1.4100003242492676
+reset
+global_step=3068, episodic_return=-1.4100003242492676
+reset
+global_step=3200, episodic_return=-1.4100003242492676
+reset
+global_step=3256, episodic_return=-1.4100003242492676
+reset
+global_step=3292, episodic_return=-1.3000004291534424
+reset
+global_step=3304, episodic_return=-1.4100003242492676
+reset
+global_step=3436, episodic_return=-1.4100003242492676
+reset
+global_step=3492, episodic_return=-1.4100003242492676
+reset
+global_step=3524, episodic_return=-1.4200003147125244
+reset
+global_step=3540, episodic_return=-1.4100003242492676
+reset
+global_step=3672, episodic_return=-1.4100003242492676
+reset
+global_step=3728, episodic_return=-1.4100003242492676
+reset
+global_step=3756, episodic_return=-1.4200003147125244
+reset
+global_step=3776, episodic_return=-1.4100003242492676
+reset
+global_step=3908, episodic_return=-1.4100003242492676
+reset
+global_step=3964, episodic_return=-1.4100003242492676
+reset
+global_step=3988, episodic_return=-1.4200003147125244
+reset
+global_step=4012, episodic_return=-1.4100003242492676
+reset
+global_step=4144, episodic_return=-1.4100003242492676
+reset
+global_step=4200, episodic_return=-1.4100003242492676
+reset
+global_step=4220, episodic_return=-1.4200003147125244
+reset
+global_step=4248, episodic_return=-1.4100003242492676
+reset
+global_step=4380, episodic_return=-1.4100003242492676
+reset
+global_step=4436, episodic_return=-1.4100003242492676
+reset
+global_step=4452, episodic_return=-1.4200003147125244
+reset
+global_step=4484, episodic_return=-1.4100003242492676
+reset
+global_step=4616, episodic_return=-1.4100003242492676
+reset
+global_step=4672, episodic_return=-1.4100003242492676
+reset
+global_step=4704, episodic_return=-1.3700003623962402
+reset
+global_step=4720, episodic_return=-1.4100003242492676
+reset
+global_step=4852, episodic_return=-1.4100003242492676
+reset
+global_step=4908, episodic_return=-1.4100003242492676
+reset
+global_step=4956, episodic_return=-1.4100003242492676
+reset
+global_step=5028, episodic_return=-1.1900005340576172
+reset
+global_step=5088, episodic_return=-1.4100003242492676
+reset
+global_step=5144, episodic_return=-1.4100003242492676
+reset
+global_step=5192, episodic_return=-1.4100003242492676
+reset
+global_step=5264, episodic_return=-1.4100003242492676
+reset
+global_step=5324, episodic_return=-1.4100003242492676
+reset
+global_step=5380, episodic_return=-1.4100003242492676
+reset
+global_step=5428, episodic_return=-1.4100003242492676
+reset
+global_step=5560, episodic_return=-1.4100003242492676
+reset
+global_step=5616, episodic_return=-1.4100003242492676
+reset
+global_step=5664, episodic_return=-1.4100003242492676
+reset
+global_step=5796, episodic_return=-1.4100003242492676
+reset
+global_step=5852, episodic_return=-1.4100003242492676
+reset
+global_step=5884, episodic_return=-0.4500011205673218
+reset
+global_step=5900, episodic_return=-1.4100003242492676
+reset
+global_step=6032, episodic_return=-1.4100003242492676
+reset
+global_step=6132, episodic_return=-1.3000004291534424
+reset
+global_step=6136, episodic_return=-1.4100003242492676
+reset
+global_step=6164, episodic_return=-1.3000004291534424
+reset
+global_step=6268, episodic_return=-1.4100003242492676
+reset
+global_step=6368, episodic_return=-1.4100003242492676
+reset
+global_step=6372, episodic_return=-1.4100003242492676
+reset
+global_step=6396, episodic_return=-1.4200003147125244
+reset
+global_step=6504, episodic_return=-1.4100003242492676
+reset
+global_step=6604, episodic_return=-1.4100003242492676
+reset
+global_step=6608, episodic_return=-1.4100003242492676
+reset
+global_step=6628, episodic_return=-1.4200003147125244
+reset
+global_step=6740, episodic_return=-1.4100003242492676
+reset
+global_step=6840, episodic_return=-1.4100003242492676
+reset
+global_step=6844, episodic_return=-1.4100003242492676
+reset
+global_step=6860, episodic_return=-1.4200003147125244
+reset
+global_step=6976, episodic_return=-1.4100003242492676
+reset
+global_step=7076, episodic_return=-1.4100003242492676
+reset
+global_step=7080, episodic_return=-1.4100003242492676
+reset
+global_step=7092, episodic_return=-1.4200003147125244
+reset
+global_step=7212, episodic_return=-1.4100003242492676
+reset
+global_step=7312, episodic_return=-1.4100003242492676
+reset
+global_step=7316, episodic_return=-1.4100003242492676
+reset
+global_step=7324, episodic_return=-1.4200003147125244
+reset
+global_step=7448, episodic_return=-1.4100003242492676
+reset
+global_step=7548, episodic_return=-1.4100003242492676
+reset
+global_step=7552, episodic_return=-1.4100003242492676
+reset
+global_step=7556, episodic_return=-1.4200003147125244
+reset
+global_step=7684, episodic_return=-1.4100003242492676
+reset
+global_step=7784, episodic_return=-1.4100003242492676
+reset
+reset
+global_step=7788, episodic_return=-1.4200003147125244
+global_step=7788, episodic_return=-1.4100003242492676
+reset
+global_step=7920, episodic_return=-1.4100003242492676
+reset
+reset
+global_step=8020, episodic_return=-1.4200003147125244
+global_step=8020, episodic_return=-1.4100003242492676
+reset
+global_step=8024, episodic_return=-1.4100003242492676
+reset
+global_step=8156, episodic_return=-1.4100003242492676
+SPS: 366
+reset
+global_step=8252, episodic_return=-1.4200003147125244
+reset
+global_step=8256, episodic_return=-1.4100003242492676
+reset
+global_step=8392, episodic_return=-1.4100003242492676
+reset
+global_step=8484, episodic_return=-1.4200003147125244
+reset
+global_step=8492, episodic_return=-1.4100003242492676
+reset
+global_step=8592, episodic_return=-0.5800009965896606
+reset
+global_step=8628, episodic_return=-1.4100003242492676
+reset
+global_step=8716, episodic_return=-1.4200003147125244
+reset
+global_step=8728, episodic_return=-1.4100003242492676
+reset
+global_step=8824, episodic_return=-1.4200003147125244
+reset
+global_step=8864, episodic_return=-1.4100003242492676
+reset
+global_step=8948, episodic_return=-1.4200003147125244
+reset
+global_step=8964, episodic_return=-1.4100003242492676
+reset
+global_step=9060, episodic_return=-1.4100003242492676
+reset
+global_step=9180, episodic_return=-1.4200003147125244
+reset
+global_step=9200, episodic_return=-1.4100003242492676
+reset
+global_step=9376, episodic_return=-1.2100005149841309
+reset
+global_step=9412, episodic_return=-1.4200003147125244
+reset
+global_step=9436, episodic_return=-1.4100003242492676
+reset
+global_step=9600, episodic_return=-0.16000139713287354
+reset
+global_step=9616, episodic_return=-1.4000003337860107
+reset
+global_step=9644, episodic_return=-1.4200003147125244
+reset
+global_step=9672, episodic_return=-1.4100003242492676
+reset
+global_step=9832, episodic_return=-1.4200003147125244
+reset
+global_step=9876, episodic_return=-1.4200003147125244
+reset
+global_step=9908, episodic_return=-1.4100003242492676
+reset
+global_step=10064, episodic_return=-1.4200003147125244
+reset
+global_step=10108, episodic_return=-1.4200003147125244
+reset
+global_step=10144, episodic_return=-1.4100003242492676
+reset
+global_step=10248, episodic_return=-0.42000114917755127
+reset
+global_step=10296, episodic_return=-1.4200003147125244
+reset
+global_step=10340, episodic_return=-1.4200003147125244
+reset
+global_step=10380, episodic_return=-1.4100003242492676
+reset
+global_step=10572, episodic_return=-1.4200003147125244
+reset
+global_step=10596, episodic_return=-1.2500004768371582
+reset
+global_step=10616, episodic_return=-1.4100003242492676
+reset
+global_step=10804, episodic_return=-1.4200003147125244
+reset
+global_step=10836, episodic_return=-1.4000003337860107
+reset
+global_step=10852, episodic_return=-1.4100003242492676
+reset
+global_step=10912, episodic_return=-0.3400012254714966
+reset
+global_step=11036, episodic_return=-1.4200003147125244
+reset
+global_step=11068, episodic_return=-1.4200003147125244
+reset
+global_step=11088, episodic_return=-1.4100003242492676
+reset
+global_step=11268, episodic_return=-1.4200003147125244
+reset
+global_step=11300, episodic_return=-1.4200003147125244
+reset
+global_step=11324, episodic_return=-1.4100003242492676
+reset
+global_step=11336, episodic_return=-0.9400006532669067
+reset
+global_step=11500, episodic_return=-1.4200003147125244
+reset
+global_step=11536, episodic_return=-1.4100003242492676
+reset
+global_step=11560, episodic_return=-1.4100003242492676
+reset
+global_step=11732, episodic_return=-1.4200003147125244
+reset
+global_step=11796, episodic_return=-1.4100003242492676
+reset
+global_step=11864, episodic_return=-0.680000901222229
+reset
+global_step=11964, episodic_return=-1.4200003147125244
+reset
+global_step=12000, episodic_return=-0.8400007486343384
+reset
+global_step=12032, episodic_return=-1.4100003242492676
+reset
+global_step=12196, episodic_return=-1.4200003147125244
+reset
+global_step=12232, episodic_return=-1.080000638961792
+reset
+global_step=12308, episodic_return=-1.2300004959106445
+reset
+global_step=12332, episodic_return=-1.2500004768371582
+reset
+global_step=12428, episodic_return=-1.4200003147125244
+reset
+global_step=12540, episodic_return=-1.4200003147125244
+reset
+global_step=12564, episodic_return=-1.4200003147125244
+reset
+global_step=12580, episodic_return=-1.1300005912780762
+reset
+global_step=12660, episodic_return=-1.4200003147125244
+reset
+global_step=12772, episodic_return=-1.4200003147125244
+reset
+global_step=12812, episodic_return=-1.4200003147125244
+reset
+global_step=12832, episodic_return=-1.330000400543213
+reset
+global_step=12892, episodic_return=-1.4200003147125244
+reset
+global_step=13004, episodic_return=-1.4200003147125244
+reset
+global_step=13044, episodic_return=-1.4200003147125244
+reset
+global_step=13124, episodic_return=-1.4200003147125244
+reset
+global_step=13148, episodic_return=-1.2100005149841309
+reset
+global_step=13236, episodic_return=-1.4200003147125244
+reset
+global_step=13276, episodic_return=-1.4200003147125244
+reset
+global_step=13356, episodic_return=-1.4200003147125244
+reset
+global_step=13468, episodic_return=-1.4200003147125244
+reset
+global_step=13508, episodic_return=-1.4200003147125244
+reset
+global_step=13588, episodic_return=-1.4200003147125244
+reset
+global_step=13700, episodic_return=-1.4200003147125244
+reset
+global_step=13740, episodic_return=-1.4200003147125244
+reset
+global_step=13820, episodic_return=-1.4200003147125244
+reset
+global_step=13932, episodic_return=-1.4200003147125244
+reset
+global_step=13976, episodic_return=-1.4100003242492676
+reset
+global_step=14052, episodic_return=-1.4200003147125244
+reset
+global_step=14108, episodic_return=0.39999818801879883
+reset
+global_step=14164, episodic_return=-1.4200003147125244
+reset
+global_step=14216, episodic_return=-1.4000003337860107
+reset
+global_step=14284, episodic_return=-1.4200003147125244
+reset
+global_step=14396, episodic_return=-1.4200003147125244
+reset
+global_step=14452, episodic_return=-1.4100003242492676
+reset
+global_step=14492, episodic_return=-1.0400006771087646
+reset
+global_step=14516, episodic_return=-1.4200003147125244
+reset
+global_step=14628, episodic_return=-1.4200003147125244
+reset
+global_step=14684, episodic_return=-1.4200003147125244
+reset
+global_step=14728, episodic_return=-1.4100003242492676
+reset
+global_step=14748, episodic_return=-1.4200003147125244
+reset
+global_step=14860, episodic_return=-1.4200003147125244
+reset
+global_step=14916, episodic_return=-1.4200003147125244
+reset
+global_step=14980, episodic_return=-1.4200003147125244
+reset
+global_step=15028, episodic_return=-1.2500004768371582
+reset
+global_step=15092, episodic_return=-1.4200003147125244
+reset
+global_step=15148, episodic_return=-1.4200003147125244
+reset
+global_step=15212, episodic_return=-1.4200003147125244
+reset
+global_step=15324, episodic_return=-1.4200003147125244
+reset
+global_step=15380, episodic_return=-1.4200003147125244
+reset
+global_step=15444, episodic_return=-1.4200003147125244
+reset
+global_step=15472, episodic_return=-0.8900007009506226
+reset
+global_step=15556, episodic_return=-1.4200003147125244
+reset
+global_step=15612, episodic_return=-1.4200003147125244
+reset
+global_step=15676, episodic_return=-1.4200003147125244
+reset
+global_step=15704, episodic_return=-1.4200003147125244
+reset
+global_step=15796, episodic_return=-1.4000003337860107
+reset
+global_step=15844, episodic_return=-1.4200003147125244
+reset
+global_step=15908, episodic_return=-1.4200003147125244
+reset
+global_step=16032, episodic_return=-1.4100003242492676
+reset
+global_step=16080, episodic_return=-1.4100003242492676
+reset
+global_step=16128, episodic_return=-0.9400006532669067
+reset
+global_step=16140, episodic_return=-1.4200003147125244
+reset
+global_step=16268, episodic_return=-1.4100003242492676
+reset
+global_step=16332, episodic_return=-1.3700003623962402
+reset
+global_step=16372, episodic_return=-1.4200003147125244
+SPS: 408
+reset
+global_step=16408, episodic_return=-1.3000004291534424
+reset
+global_step=16504, episodic_return=-1.4100003242492676
+reset
+global_step=16604, episodic_return=-1.4200003147125244
+reset
+global_step=16612, episodic_return=-1.3000004291534424
+reset
+global_step=16640, episodic_return=-1.4200003147125244
+reset
+global_step=16736, episodic_return=-1.4200003147125244
+reset
+global_step=16836, episodic_return=-1.4200003147125244
+reset
+global_step=16852, episodic_return=-1.4000003337860107
+reset
+global_step=16968, episodic_return=-1.4200003147125244
+reset
+global_step=17068, episodic_return=-1.4200003147125244
+reset
+global_step=17176, episodic_return=-1.1900005340576172
+reset
+global_step=17200, episodic_return=-1.4200003147125244
+reset
+global_step=17284, episodic_return=-0.39000117778778076
+reset
+global_step=17300, episodic_return=-1.4200003147125244
+reset
+global_step=17428, episodic_return=-1.3700003623962402
+reset
+global_step=17432, episodic_return=-1.4200003147125244
+reset
+global_step=17532, episodic_return=-1.4200003147125244
+reset
+global_step=17672, episodic_return=-1.4000003337860107
+reset
+global_step=17680, episodic_return=-1.3700003623962402
+reset
+global_step=17764, episodic_return=-1.4200003147125244
+reset
+global_step=17776, episodic_return=-0.7700008153915405
+reset
+global_step=17920, episodic_return=-1.4000003337860107
+reset
+global_step=17996, episodic_return=-1.4200003147125244
+reset
+global_step=18088, episodic_return=-0.9600006341934204
+reset
+global_step=18160, episodic_return=-1.0400006771087646
+reset
+global_step=18228, episodic_return=-1.4200003147125244
+reset
+global_step=18416, episodic_return=-1.3600003719329834
+reset
+global_step=18420, episodic_return=-1.1700005531311035
+reset
+global_step=18460, episodic_return=-1.4200003147125244
+reset
+global_step=18524, episodic_return=-0.4900010824203491
+reset
+global_step=18660, episodic_return=-1.4000003337860107
+reset
+global_step=18692, episodic_return=-1.4200003147125244
+reset
+global_step=18788, episodic_return=-1.0700006484985352
+reset
+global_step=18900, episodic_return=-1.4000003337860107
+reset
+global_step=18924, episodic_return=-1.4200003147125244
+reset
+global_step=19020, episodic_return=-1.4200003147125244
+reset
+global_step=19044, episodic_return=-0.7000008821487427
+reset
+global_step=19132, episodic_return=-1.4200003147125244
+reset
+global_step=19156, episodic_return=-1.4200003147125244
+reset
+global_step=19252, episodic_return=-1.4200003147125244
+reset
+global_step=19364, episodic_return=-1.4200003147125244
+reset
+global_step=19388, episodic_return=-1.4200003147125244
+reset
+global_step=19504, episodic_return=-0.8500007390975952
+reset
+global_step=19616, episodic_return=-1.3700003623962402
+reset
+global_step=19620, episodic_return=-1.4200003147125244
+reset
+global_step=19852, episodic_return=-1.4200003147125244
+reset
+global_step=19916, episodic_return=-1.2500004768371582
+reset
+global_step=19984, episodic_return=-0.800000786781311
+reset
+global_step=20084, episodic_return=-1.4200003147125244
+reset
+global_step=20316, episodic_return=-1.4200003147125244
+reset
+global_step=20332, episodic_return=-1.1300005912780762
+reset
+global_step=20536, episodic_return=-0.4500011205673218
+reset
+global_step=20548, episodic_return=-1.4200003147125244
+reset
+global_step=20552, episodic_return=1.2499973773956299
+reset
+global_step=20780, episodic_return=-1.4200003147125244
+reset
+global_step=20924, episodic_return=-0.5200010538101196
+reset
+global_step=21012, episodic_return=-1.4200003147125244
+reset
+global_step=21164, episodic_return=-0.4300011396408081
+reset
+global_step=21244, episodic_return=-1.4200003147125244
+reset
+global_step=21276, episodic_return=-0.19000136852264404
+reset
+global_step=21384, episodic_return=-0.8500007390975952
+reset
+global_step=21476, episodic_return=-1.4200003147125244
+reset
+global_step=21592, episodic_return=-1.2100005149841309
+reset
+global_step=21708, episodic_return=-1.4200003147125244
+reset
+global_step=21920, episodic_return=-0.6600009202957153
+reset
+global_step=21928, episodic_return=-0.09000146389007568
+reset
+global_step=21940, episodic_return=-1.4200003147125244
+reset
+global_step=22112, episodic_return=-0.7000008821487427
+reset
+global_step=22172, episodic_return=-1.4200003147125244
+reset
+global_step=22300, episodic_return=-1.0700006484985352
+reset
+global_step=22336, episodic_return=-0.9600006341934204
+reset
+global_step=22404, episodic_return=-1.4200003147125244
+reset
+global_step=22636, episodic_return=-1.4200003147125244
+reset
+global_step=22752, episodic_return=-0.8700007200241089
+reset
+global_step=22764, episodic_return=-0.3700011968612671
+reset
+global_step=22780, episodic_return=-0.8900007009506226
+reset
+global_step=22868, episodic_return=-1.4200003147125244
+reset
+global_step=23100, episodic_return=-1.4200003147125244
+reset
+global_step=23140, episodic_return=-1.0600006580352783
+reset
+global_step=23180, episodic_return=-0.9300006628036499
+reset
+global_step=23212, episodic_return=-0.9200006723403931
+reset
+global_step=23332, episodic_return=-1.4200003147125244
+reset
+global_step=23372, episodic_return=-1.4200003147125244
+reset
+global_step=23564, episodic_return=-1.4200003147125244
+reset
+global_step=23604, episodic_return=-1.4200003147125244
+reset
+global_step=23620, episodic_return=-0.9800006151199341
+reset
+global_step=23796, episodic_return=-1.4200003147125244
+reset
+global_step=23836, episodic_return=-1.4200003147125244
+reset
+global_step=23896, episodic_return=-0.21000134944915771
+reset
+global_step=24028, episodic_return=-1.4200003147125244
+reset
+global_step=24036, episodic_return=-0.9600006341934204
+reset
+global_step=24068, episodic_return=-1.4200003147125244
+reset
+global_step=24260, episodic_return=-1.4200003147125244
+reset
+global_step=24308, episodic_return=-1.4000003337860107
+reset
+global_step=24428, episodic_return=-0.6700009107589722
+reset
+reset
+global_step=24492, episodic_return=-1.4200003147125244
+global_step=24492, episodic_return=-0.860000729560852
+reset
+global_step=24560, episodic_return=-1.3700003623962402
+SPS: 415
+reset
+global_step=24724, episodic_return=-1.4200003147125244
+reset
+global_step=24792, episodic_return=-1.4200003147125244
+reset
+global_step=24864, episodic_return=-0.9100006818771362
+reset
+global_step=24956, episodic_return=-1.4200003147125244
+reset
+global_step=25024, episodic_return=-1.4200003147125244
+reset
+global_step=25104, episodic_return=-0.47000110149383545
+reset
+global_step=25188, episodic_return=-1.4200003147125244
+reset
+global_step=25300, episodic_return=-0.9100006818771362
+reset
+global_step=25420, episodic_return=-1.4200003147125244
+reset
+global_step=25548, episodic_return=-0.6900008916854858
+reset
+global_step=25600, episodic_return=-0.7600008249282837
+reset
+global_step=25652, episodic_return=-1.4200003147125244
+reset
+global_step=25884, episodic_return=-1.4200003147125244
+reset
+global_step=26044, episodic_return=-0.7600008249282837
+reset
+global_step=26116, episodic_return=-1.4200003147125244
+reset
+global_step=26260, episodic_return=-0.3500012159347534
+reset
+global_step=26336, episodic_return=0.5899980068206787
+reset
+global_step=26348, episodic_return=-1.4200003147125244
+reset
+global_step=26580, episodic_return=-1.4200003147125244
+reset
+global_step=26708, episodic_return=-0.8800007104873657
+reset
+global_step=26772, episodic_return=-0.1800013780593872
+reset
+global_step=26812, episodic_return=-1.4200003147125244
+reset
+global_step=27044, episodic_return=-1.4200003147125244
+reset
+global_step=27220, episodic_return=0.20999836921691895
+reset
+global_step=27240, episodic_return=-0.8300007581710815
+reset
+global_step=27264, episodic_return=-0.6100009679794312
+reset
+global_step=27276, episodic_return=-1.4200003147125244
+reset
+global_step=27476, episodic_return=-1.4100003242492676
+reset
+global_step=27508, episodic_return=-1.4200003147125244
+reset
+global_step=27664, episodic_return=-1.0000007152557373
+reset
+global_step=27728, episodic_return=-1.3700003623962402
+reset
+global_step=27740, episodic_return=-1.4200003147125244
+reset
+global_step=27936, episodic_return=-0.21000134944915771
+reset
+global_step=27968, episodic_return=-1.4000003337860107
+reset
+global_step=27972, episodic_return=-1.4200003147125244
+reset
+global_step=28120, episodic_return=-0.860000729560852
+reset
+global_step=28204, episodic_return=-1.4200003147125244
+reset
+global_step=28220, episodic_return=-1.3700003623962402
+reset
+global_step=28436, episodic_return=-1.4200003147125244
+reset
+global_step=28552, episodic_return=-0.4600011110305786
+reset
+global_step=28668, episodic_return=-1.4200003147125244
+reset
+global_step=28756, episodic_return=-0.6600009202957153
+reset
+global_step=28900, episodic_return=-1.4200003147125244
+reset
+global_step=29128, episodic_return=0.5199980735778809
+reset
+global_step=29132, episodic_return=-1.4200003147125244
+reset
+global_step=29192, episodic_return=-0.4000011682510376
+reset
+global_step=29364, episodic_return=-1.4200003147125244
+reset
+global_step=29568, episodic_return=-0.9000006914138794
+reset
+global_step=29596, episodic_return=-1.4200003147125244
+reset
+global_step=29828, episodic_return=-1.4200003147125244
+reset
+global_step=29832, episodic_return=0.6899979114532471
+reset
+global_step=30060, episodic_return=-1.4200003147125244
+reset
+global_step=30092, episodic_return=-0.6900008916854858
+reset
+global_step=30112, episodic_return=0.29999828338623047
+reset
+global_step=30204, episodic_return=-1.0700006484985352
+reset
+global_step=30292, episodic_return=-1.4200003147125244
+reset
+global_step=30456, episodic_return=-1.3700003623962402
+reset
+global_step=30524, episodic_return=-1.4200003147125244
+reset
+global_step=30564, episodic_return=-0.8200007677078247
+reset
+global_step=30688, episodic_return=-1.4200003147125244
+reset
+global_step=30756, episodic_return=-1.4200003147125244
+reset
+global_step=30988, episodic_return=-1.4200003147125244
+reset
+global_step=31032, episodic_return=0.29999828338623047
+reset
+global_step=31044, episodic_return=-0.800000786781311
+reset
+global_step=31196, episodic_return=-0.7300008535385132
+reset
+global_step=31220, episodic_return=-1.4200003147125244
+reset
+global_step=31452, episodic_return=-1.4200003147125244
+reset
+global_step=31636, episodic_return=-0.5200010538101196
+reset
+global_step=31684, episodic_return=-1.4200003147125244
+reset
+global_step=31772, episodic_return=-0.560001015663147
+reset
+global_step=31916, episodic_return=-1.4200003147125244
+reset
+global_step=31956, episodic_return=0.3099982738494873
+reset
+global_step=32148, episodic_return=-1.4200003147125244
+reset
+global_step=32260, episodic_return=-0.7800008058547974
+reset
+global_step=32272, episodic_return=-0.41000115871429443
+reset
+global_step=32380, episodic_return=-1.4200003147125244
+reset
+global_step=32588, episodic_return=-0.42000114917755127
+reset
+global_step=32612, episodic_return=-1.4200003147125244
+reset
+global_step=32732, episodic_return=-0.8500007390975952
+SPS: 431
+reset
+global_step=32844, episodic_return=-1.4200003147125244
+reset
+global_step=32852, episodic_return=-0.5200010538101196
+reset
+global_step=33076, episodic_return=-1.4200003147125244
+reset
+global_step=33088, episodic_return=-1.4100003242492676
+reset
+global_step=33192, episodic_return=-0.8500007390975952
+reset
+global_step=33308, episodic_return=-1.4200003147125244
+reset
+global_step=33324, episodic_return=-1.4100003242492676
+reset
+global_step=33540, episodic_return=-1.4200003147125244
+reset
+global_step=33560, episodic_return=-1.4100003242492676
+reset
+global_step=33580, episodic_return=0.4799981117248535
+reset
+global_step=33772, episodic_return=-1.4200003147125244
+reset
+global_step=33796, episodic_return=-1.4100003242492676
+reset
+global_step=33904, episodic_return=-0.22000133991241455
+reset
+global_step=34004, episodic_return=-1.4200003147125244
+reset
+global_step=34052, episodic_return=-1.3600003719329834
+reset
+global_step=34236, episodic_return=-1.4200003147125244
+reset
+global_step=34292, episodic_return=-1.4000003337860107
+reset
+global_step=34388, episodic_return=-0.7900007963180542
+reset
+global_step=34468, episodic_return=-1.4200003147125244
+reset
+global_step=34528, episodic_return=-1.4100003242492676
+reset
+global_step=34608, episodic_return=0.569998025894165
+reset
+global_step=34700, episodic_return=-1.4200003147125244
+reset
+global_step=34764, episodic_return=-1.4100003242492676
+reset
+global_step=34932, episodic_return=-1.4200003147125244
+reset
+global_step=35000, episodic_return=-1.4100003242492676
+reset
+global_step=35052, episodic_return=-0.3400012254714966
+reset
+global_step=35164, episodic_return=-1.4200003147125244
+reset
+global_step=35236, episodic_return=-1.4100003242492676
+reset
+global_step=35396, episodic_return=-1.4200003147125244
+reset
+global_step=35600, episodic_return=-0.6300009489059448
+reset
+global_step=35604, episodic_return=0.48999810218811035
+reset
+global_step=35628, episodic_return=-1.4200003147125244
+reset
+global_step=35848, episodic_return=-0.47000110149383545
+reset
+global_step=35860, episodic_return=-1.4200003147125244
+reset
+global_step=36092, episodic_return=-1.4200003147125244
+reset
+global_step=36160, episodic_return=-0.6100009679794312
+reset
+global_step=36268, episodic_return=-0.33000123500823975
+reset
+global_step=36324, episodic_return=-1.4200003147125244
+reset
+global_step=36460, episodic_return=-1.2500004768371582
+reset
+global_step=36556, episodic_return=-1.4200003147125244
+reset
+global_step=36560, episodic_return=-0.22000133991241455
+reset
+global_step=36788, episodic_return=-1.4200003147125244
+reset
+global_step=36940, episodic_return=-0.3200012445449829
+reset
+global_step=37016, episodic_return=-0.6100009679794312
+reset
+global_step=37020, episodic_return=-1.4200003147125244
+reset
+global_step=37252, episodic_return=-1.4200003147125244
+reset
+global_step=37416, episodic_return=0.1399984359741211
+reset
+global_step=37484, episodic_return=-1.4200003147125244
+reset
+global_step=37540, episodic_return=-0.6900008916854858
+reset
+global_step=37604, episodic_return=-0.3400012254714966
+reset
+global_step=37716, episodic_return=-1.4200003147125244
+reset
+global_step=37884, episodic_return=-0.8300007581710815
+reset
+global_step=37948, episodic_return=-1.4200003147125244
+reset
+global_step=38148, episodic_return=-0.4800010919570923
+reset
+global_step=38168, episodic_return=-0.5900009870529175
+reset
+global_step=38180, episodic_return=-1.4200003147125244
+reset
+global_step=38372, episodic_return=-0.7800008058547974
+reset
+global_step=38412, episodic_return=-1.4200003147125244
+reset
+global_step=38644, episodic_return=-1.4200003147125244
+reset
+global_step=38816, episodic_return=-0.3800011873245239
+reset
+global_step=38876, episodic_return=-1.4200003147125244
+reset
+global_step=39096, episodic_return=-0.19000136852264404
+reset
+global_step=39108, episodic_return=-1.4200003147125244
+reset
+global_step=39140, episodic_return=0.4799981117248535
+reset
+global_step=39340, episodic_return=-1.4200003147125244
+reset
+global_step=39464, episodic_return=-0.3800011873245239
+reset
+global_step=39572, episodic_return=-1.4200003147125244
+reset
+global_step=39776, episodic_return=-0.30000126361846924
+reset
+global_step=39804, episodic_return=-1.4200003147125244
+reset
+global_step=40036, episodic_return=-1.4200003147125244
+reset
+reset
+global_step=40100, episodic_return=-0.41000115871429443
+global_step=40100, episodic_return=0.39999818801879883
+reset
+global_step=40268, episodic_return=-1.4200003147125244
+reset
+global_step=40500, episodic_return=-1.4200003147125244
+reset
+global_step=40620, episodic_return=0.10999846458435059
+reset
+global_step=40688, episodic_return=-0.5300010442733765
+reset
+global_step=40732, episodic_return=-1.4200003147125244
+reset
+global_step=40768, episodic_return=-0.33000123500823975
+SPS: 442
+reset
+global_step=40964, episodic_return=-1.4200003147125244
+reset
+global_step=41080, episodic_return=-0.8500007390975952
+reset
+global_step=41196, episodic_return=-1.4200003147125244
+reset
+global_step=41320, episodic_return=-1.4000003337860107
+reset
+global_step=41392, episodic_return=-0.44000113010406494
+reset
+global_step=41428, episodic_return=-1.4200003147125244
+reset
+global_step=41488, episodic_return=-1.5497207641601562e-06
+reset
+global_step=41572, episodic_return=-1.3700003623962402
+reset
+global_step=41660, episodic_return=-1.4200003147125244
+reset
+global_step=41824, episodic_return=-1.3700003623962402
+reset
+global_step=41892, episodic_return=-1.4200003147125244
+reset
+global_step=42048, episodic_return=-0.36000120639801025
+reset
+global_step=42076, episodic_return=-1.3700003623962402
+reset
+global_step=42124, episodic_return=-1.4200003147125244
+reset
+global_step=42356, episodic_return=-1.4200003147125244
+reset
+global_step=42508, episodic_return=0.5499980449676514
+reset
+global_step=42588, episodic_return=-1.4200003147125244
+reset
+global_step=42716, episodic_return=-0.33000123500823975
+reset
+global_step=42820, episodic_return=-1.4200003147125244
+reset
+global_step=43008, episodic_return=0.329998254776001
+reset
+global_step=43052, episodic_return=-1.4200003147125244
+reset
+global_step=43120, episodic_return=-0.47000110149383545
+reset
+global_step=43284, episodic_return=-1.4200003147125244
+reset
+global_step=43380, episodic_return=-0.3400012254714966
+reset
+global_step=43516, episodic_return=-1.4200003147125244
+reset
+global_step=43568, episodic_return=-0.6000009775161743
+reset
+global_step=43748, episodic_return=-1.4200003147125244
+reset
+global_step=43980, episodic_return=-1.4200003147125244
+reset
+global_step=43992, episodic_return=-0.47000110149383545
+reset
+global_step=44120, episodic_return=-0.620000958442688
+reset
+global_step=44212, episodic_return=-1.4200003147125244
+reset
+global_step=44380, episodic_return=1.1499974727630615
+reset
+global_step=44424, episodic_return=-0.9200006723403931
+reset
+global_step=44444, episodic_return=-1.4200003147125244
+reset
+global_step=44676, episodic_return=-1.4200003147125244
+reset
+global_step=44816, episodic_return=-0.2600013017654419
+reset
+global_step=44884, episodic_return=-0.8500007390975952
+reset
+global_step=44908, episodic_return=-1.4200003147125244
+reset
+global_step=45140, episodic_return=-1.4200003147125244
+reset
+global_step=45152, episodic_return=-0.07000148296356201
+reset
+global_step=45372, episodic_return=-1.4200003147125244
+reset
+global_step=45552, episodic_return=-0.33000123500823975
+reset
+global_step=45604, episodic_return=-1.4200003147125244
+reset
+global_step=45696, episodic_return=0.1999983787536621
+reset
+global_step=45836, episodic_return=-1.4200003147125244
+reset
+global_step=46068, episodic_return=-1.4200003147125244
+reset
+global_step=46112, episodic_return=0.39999818801879883
+reset
+global_step=46164, episodic_return=-0.47000110149383545
+reset
+global_step=46232, episodic_return=-0.6600009202957153
+reset
+global_step=46300, episodic_return=-1.4200003147125244
+reset
+global_step=46532, episodic_return=-1.4200003147125244
+reset
+global_step=46544, episodic_return=-1.0500006675720215
+reset
+global_step=46580, episodic_return=-1.1300005912780762
+reset
+global_step=46764, episodic_return=-1.4200003147125244
+reset
+global_step=46820, episodic_return=-1.4000003337860107
+reset
+global_step=46924, episodic_return=0.0299985408782959
+reset
+global_step=46996, episodic_return=-1.4200003147125244
+reset
+global_step=47004, episodic_return=-0.8500007390975952
+reset
+global_step=47056, episodic_return=-1.4100003242492676
+reset
+global_step=47228, episodic_return=-1.4200003147125244
+reset
+global_step=47436, episodic_return=-0.9200006723403931
+reset
+global_step=47460, episodic_return=-1.4200003147125244
+reset
+global_step=47692, episodic_return=-1.4200003147125244
+reset
+global_step=47876, episodic_return=0.37999820709228516
+reset
+global_step=47880, episodic_return=-0.8900007009506226
+reset
+global_step=47924, episodic_return=-1.4200003147125244
+reset
+global_step=47944, episodic_return=0.21999835968017578
+reset
+global_step=48156, episodic_return=-1.4200003147125244
+reset
+global_step=48308, episodic_return=-0.9300006628036499
+reset
+global_step=48388, episodic_return=-1.4200003147125244
+reset
+global_step=48488, episodic_return=-0.6400009393692017
+reset
+global_step=48620, episodic_return=-1.4200003147125244
+reset
+global_step=48752, episodic_return=-0.8900007009506226
+reset
+reset
+global_step=48852, episodic_return=-1.4200003147125244
+global_step=48852, episodic_return=0.43999814987182617
+reset
+global_step=49084, episodic_return=-1.4200003147125244
+Traceback (most recent call last):
+  File "ppo_continuous.py", line 312, in <module>
+    optimizer.step()
+  File "/home/oem/.pyenv/versions/rl-planner/lib/python3.8/site-packages/torch/optim/optimizer.py", line 140, in wrapper
+    out = func(*args, **kwargs)
+  File "/home/oem/.pyenv/versions/rl-planner/lib/python3.8/site-packages/torch/optim/optimizer.py", line 23, in _use_grad
+    ret = func(self, *args, **kwargs)
+  File "/home/oem/.pyenv/versions/rl-planner/lib/python3.8/site-packages/torch/optim/adam.py", line 234, in step
+    adam(params_with_grad,
+  File "/home/oem/.pyenv/versions/rl-planner/lib/python3.8/site-packages/torch/optim/adam.py", line 300, in adam
+    func(params,
+  File "/home/oem/.pyenv/versions/rl-planner/lib/python3.8/site-packages/torch/optim/adam.py", line 364, in _single_tensor_adam
+    exp_avg_sq.mul_(beta2).addcmul_(grad, grad.conj(), value=1 - beta2)
+KeyboardInterrupt

@@ -1,0 +1,363 @@
+2023-04-18 19:48:26,391 INFO    StreamThr :48384 [internal.py:wandb_internal():86] W&B internal server running at pid: 48384, started at: 2023-04-18 19:48:26.390904
+2023-04-18 19:48:26,393 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: status
+2023-04-18 19:48:26,394 INFO    WriterThread:48384 [datastore.py:open_for_write():85] open: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/run-xdgnko6z.wandb
+2023-04-18 19:48:26,396 DEBUG   SenderThread:48384 [sender.py:send():375] send: header
+2023-04-18 19:48:26,423 DEBUG   SenderThread:48384 [sender.py:send():375] send: run
+2023-04-18 19:48:26,745 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: check_version
+2023-04-18 19:48:26,748 INFO    SenderThread:48384 [dir_watcher.py:__init__():219] watching files in: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files
+2023-04-18 19:48:26,748 INFO    SenderThread:48384 [sender.py:_start_run_threads():1124] run started: xdgnko6z with start time 1681861706.389269
+2023-04-18 19:48:26,748 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:26,749 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:26,749 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: check_version
+2023-04-18 19:48:26,885 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: run_start
+2023-04-18 19:48:26,915 DEBUG   HandlerThread:48384 [system_info.py:__init__():31] System info init
+2023-04-18 19:48:26,915 DEBUG   HandlerThread:48384 [system_info.py:__init__():46] System info init done
+2023-04-18 19:48:26,916 INFO    HandlerThread:48384 [system_monitor.py:start():181] Starting system monitor
+2023-04-18 19:48:26,916 INFO    SystemMonitor:48384 [system_monitor.py:_start():145] Starting system asset monitoring threads
+2023-04-18 19:48:26,916 INFO    HandlerThread:48384 [system_monitor.py:probe():201] Collecting system info
+2023-04-18 19:48:26,917 INFO    SystemMonitor:48384 [interfaces.py:start():190] Started cpu monitoring
+2023-04-18 19:48:26,917 INFO    SystemMonitor:48384 [interfaces.py:start():190] Started disk monitoring
+2023-04-18 19:48:26,919 INFO    SystemMonitor:48384 [interfaces.py:start():190] Started gpu monitoring
+2023-04-18 19:48:26,919 INFO    SystemMonitor:48384 [interfaces.py:start():190] Started memory monitoring
+2023-04-18 19:48:26,920 INFO    SystemMonitor:48384 [interfaces.py:start():190] Started network monitoring
+2023-04-18 19:48:26,981 DEBUG   HandlerThread:48384 [system_info.py:probe():195] Probing system
+2023-04-18 19:48:26,993 DEBUG   HandlerThread:48384 [system_info.py:_probe_git():180] Probing git
+2023-04-18 19:48:27,021 DEBUG   HandlerThread:48384 [system_info.py:_probe_git():188] Probing git done
+2023-04-18 19:48:27,021 DEBUG   HandlerThread:48384 [system_info.py:probe():240] Probing system done
+2023-04-18 19:48:27,021 DEBUG   HandlerThread:48384 [system_monitor.py:probe():210] {'os': 'Linux-5.15.0-69-generic-x86_64-with-glibc2.29', 'python': '3.8.10', 'heartbeatAt': '2023-04-18T23:48:26.981848', 'startedAt': '2023-04-18T23:48:26.382018', 'docker': None, 'cuda': None, 'args': ('--num-envs', '4', '--total-timesteps', '1000000', '--track'), 'state': 'running', 'program': 'ppo_continuous.py', 'codePath': 'pure_pursuit/ppo_continuous.py', 'git': {'remote': 'https://github.com/derekhanbaliq/RL-planner.git', 'commit': '1090559d2b7793f4c9ae9660374d47097db77cf8'}, 'email': 'gkuppa@ghostrobotics.io', 'root': '/home/oem/Documents/School/ESE_615/RL-planner', 'host': 'g', 'username': 'oem', 'executable': '/home/oem/.pyenv/versions/rl-planner/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 1539.2113125, 'min': 1200.0, 'max': 3300.0}, 'cpu_freq_per_core': [{'current': 2511.456, 'min': 1200.0, 'max': 3300.0}, {'current': 1300.0, 'min': 1200.0, 'max': 3300.0}, {'current': 2109.619, 'min': 1200.0, 'max': 3300.0}, {'current': 1300.0, 'min': 1200.0, 'max': 3300.0}, {'current': 2012.722, 'min': 1200.0, 'max': 3300.0}, {'current': 1300.0, 'min': 1200.0, 'max': 3300.0}, {'current': 1300.0, 'min': 1200.0, 'max': 3300.0}, {'current': 3300.0, 'min': 1200.0, 'max': 3300.0}, {'current': 1300.0, 'min': 1200.0, 'max': 3300.0}, {'current': 1200.0, 'min': 1200.0, 'max': 3300.0}, {'current': 2555.495, 'min': 1200.0, 'max': 3300.0}, {'current': 1300.0, 'min': 1200.0, 'max': 3300.0}, {'current': 2504.122, 'min': 1200.0, 'max': 3300.0}, {'current': 1300.0, 'min': 1200.0, 'max': 3300.0}, {'current': 1300.0, 'min': 1200.0, 'max': 3300.0}, {'current': 2026.223, 'min': 1200.0, 'max': 3300.0}], 'disk': {'total': 937.3305015563965, 'used': 722.3580322265625}, 'gpu': 'NVIDIA GeForce RTX 3060 Laptop GPU', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3060 Laptop GPU', 'memory_total': 6442450944}], 'memory': {'total': 38.592559814453125}}
+2023-04-18 19:48:27,022 INFO    HandlerThread:48384 [system_monitor.py:probe():211] Finished collecting system info
+2023-04-18 19:48:27,022 INFO    HandlerThread:48384 [system_monitor.py:probe():214] Publishing system info
+2023-04-18 19:48:27,022 DEBUG   HandlerThread:48384 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-04-18 19:48:27,023 DEBUG   HandlerThread:48384 [system_info.py:_save_pip():67] Saving pip packages done
+2023-04-18 19:48:27,023 DEBUG   HandlerThread:48384 [system_info.py:_save_code():89] Saving code
+2023-04-18 19:48:27,036 DEBUG   HandlerThread:48384 [system_info.py:_save_code():110] Saving code done
+2023-04-18 19:48:27,036 DEBUG   HandlerThread:48384 [system_info.py:_save_patches():127] Saving git patches
+2023-04-18 19:48:27,107 DEBUG   HandlerThread:48384 [system_info.py:_save_patches():169] Saving git patches done
+2023-04-18 19:48:27,108 INFO    HandlerThread:48384 [system_monitor.py:probe():216] Finished publishing system info
+2023-04-18 19:48:27,115 DEBUG   SenderThread:48384 [sender.py:send():375] send: files
+2023-04-18 19:48:27,115 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-metadata.json with policy now
+2023-04-18 19:48:27,116 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file code/pure_pursuit/ppo_continuous.py with policy now
+2023-04-18 19:48:27,116 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file diff.patch with policy now
+2023-04-18 19:48:27,128 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: stop_status
+2023-04-18 19:48:27,128 INFO    HandlerThread:48384 [handler.py:handle_tbrecord():750] handling tbrecord: tbrecord {
+  log_dir: "runs/F1Tenth-Planner__ppo_continuous__1__1681861703"
+  save: true
+}
+control {
+  relay_id: "8525cec1d7f74e39b7978d0018015f9d"
+}
+_info {
+  stream_id: "xdgnko6z"
+}
+
+2023-04-18 19:48:27,129 DEBUG   SenderThread:48384 [sender.py:send():375] send: telemetry
+2023-04-18 19:48:27,130 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: stop_status
+2023-04-18 19:48:27,132 DEBUG   HandlerThread:48384 [config_util.py:dict_from_config_file():104] no default config file found in config-defaults.yaml
+2023-04-18 19:48:27,354 DEBUG   SenderThread:48384 [sender.py:send():375] send: tbrecord
+2023-04-18 19:48:27,355 DEBUG   SenderThread:48384 [sender.py:send():375] send: files
+2023-04-18 19:48:27,355 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file events.out.tfevents.1681861707.g.48268.0 with policy live
+2023-04-18 19:48:27,377 INFO    wandb-upload_1:48384 [upload_job.py:push():117] Skipped uploading /tmp/tmpq46kjf71wandb/7sd3ufvr-code/pure_pursuit/ppo_continuous.py
+2023-04-18 19:48:27,540 INFO    wandb-upload_0:48384 [upload_job.py:push():137] Uploaded file /tmp/tmpq46kjf71wandb/xh6ecuca-wandb-metadata.json
+2023-04-18 19:48:27,684 INFO    wandb-upload_2:48384 [upload_job.py:push():137] Uploaded file /tmp/tmpq46kjf71wandb/tgbcctge-diff.patch
+2023-04-18 19:48:27,750 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_created():278] file/dir created: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:27,751 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_created():278] file/dir created: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/diff.patch
+2023-04-18 19:48:27,751 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_created():278] file/dir created: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:27,751 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_created():278] file/dir created: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/wandb-summary.json
+2023-04-18 19:48:27,751 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_created():278] file/dir created: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/requirements.txt
+2023-04-18 19:48:27,751 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_created():278] file/dir created: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/code/pure_pursuit/ppo_continuous.py
+2023-04-18 19:48:27,752 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_created():278] file/dir created: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/wandb-metadata.json
+2023-04-18 19:48:27,752 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_created():278] file/dir created: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/code
+2023-04-18 19:48:27,752 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_created():278] file/dir created: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/code/pure_pursuit
+2023-04-18 19:48:27,840 INFO    wandb-upload_3:48384 [upload_job.py:push():137] Uploaded file /tmp/tmpq46kjf71wandb/zu7fnm8l-events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:29,750 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:31,810 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: status_report
+2023-04-18 19:48:33,753 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:34,754 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:34,755 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:35,755 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:35,755 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:36,756 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:36,756 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:37,143 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: status_report
+2023-04-18 19:48:37,232 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,233 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,234 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,234 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,235 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,242 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,243 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,243 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,244 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,244 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,244 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,244 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,244 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,245 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,245 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,245 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,245 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,246 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,246 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,246 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,246 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,247 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,247 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,247 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,247 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,248 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,249 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,249 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,249 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,249 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,250 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,250 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,250 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,250 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,250 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,251 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,251 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,251 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,252 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,252 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,252 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,252 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,252 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:37,253 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:37,253 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:37,756 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:37,756 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/wandb-summary.json
+2023-04-18 19:48:38,242 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:38,243 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:38,243 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:38,244 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:38,244 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:38,252 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:38,252 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:38,252 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:38,253 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:38,253 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:38,253 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:38,253 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:38,253 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:38,254 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:38,254 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:38,757 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:38,757 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/wandb-summary.json
+2023-04-18 19:48:38,757 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:39,251 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:39,252 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:39,253 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:39,253 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:39,253 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:39,261 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:39,262 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:39,262 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:39,262 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:39,263 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:39,263 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:39,263 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:39,263 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:39,263 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:39,264 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:39,264 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:39,264 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:39,264 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:39,757 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:39,757 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/wandb-summary.json
+2023-04-18 19:48:40,264 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:40,265 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:40,266 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:40,266 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:40,267 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:40,274 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:40,275 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:40,275 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:40,276 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:40,276 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:40,276 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:40,276 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:40,277 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:40,277 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:40,277 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:40,758 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:40,758 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/wandb-summary.json
+2023-04-18 19:48:40,758 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:41,273 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:41,273 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:41,276 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:41,276 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:41,276 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:41,284 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:41,285 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:41,286 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:41,286 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:41,287 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:41,287 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:41,287 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:41,287 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:41,288 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:41,288 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:41,758 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:41,759 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/wandb-summary.json
+2023-04-18 19:48:41,993 DEBUG   SenderThread:48384 [sender.py:send():375] send: exit
+2023-04-18 19:48:41,993 INFO    SenderThread:48384 [sender.py:send_exit():598] handling exit code: 1
+2023-04-18 19:48:41,993 INFO    SenderThread:48384 [sender.py:send_exit():600] handling runtime: 15
+2023-04-18 19:48:41,994 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:41,994 INFO    SenderThread:48384 [sender.py:send_exit():606] send defer
+2023-04-18 19:48:41,994 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:41,994 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 0
+2023-04-18 19:48:41,994 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:41,994 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 0
+2023-04-18 19:48:41,994 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 1
+2023-04-18 19:48:41,994 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:41,994 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 1
+2023-04-18 19:48:41,995 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:41,995 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 1
+2023-04-18 19:48:41,995 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 2
+2023-04-18 19:48:41,995 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:41,995 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 2
+2023-04-18 19:48:41,995 INFO    HandlerThread:48384 [system_monitor.py:finish():190] Stopping system monitor
+2023-04-18 19:48:41,996 DEBUG   SystemMonitor:48384 [system_monitor.py:_start():159] Starting system metrics aggregation loop
+2023-04-18 19:48:41,996 INFO    HandlerThread:48384 [interfaces.py:finish():202] Joined cpu monitor
+2023-04-18 19:48:41,996 DEBUG   SystemMonitor:48384 [system_monitor.py:_start():166] Finished system metrics aggregation loop
+2023-04-18 19:48:41,996 INFO    HandlerThread:48384 [interfaces.py:finish():202] Joined disk monitor
+2023-04-18 19:48:41,996 DEBUG   SystemMonitor:48384 [system_monitor.py:_start():170] Publishing last batch of metrics
+2023-04-18 19:48:42,092 INFO    HandlerThread:48384 [interfaces.py:finish():202] Joined gpu monitor
+2023-04-18 19:48:42,093 INFO    HandlerThread:48384 [interfaces.py:finish():202] Joined memory monitor
+2023-04-18 19:48:42,093 INFO    HandlerThread:48384 [interfaces.py:finish():202] Joined network monitor
+2023-04-18 19:48:42,094 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:42,094 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 2
+2023-04-18 19:48:42,094 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 3
+2023-04-18 19:48:42,094 DEBUG   SenderThread:48384 [sender.py:send():375] send: stats
+2023-04-18 19:48:42,094 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:42,095 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 3
+2023-04-18 19:48:42,095 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:42,095 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 3
+2023-04-18 19:48:42,095 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 4
+2023-04-18 19:48:42,095 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:42,096 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 4
+2023-04-18 19:48:42,759 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:42,760 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/wandb-summary.json
+2023-04-18 19:48:42,760 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:43,760 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:44,760 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:48,104 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: poll_exit
+2023-04-18 19:48:48,104 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: status_report
+2023-04-18 19:48:48,104 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:48,105 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-18 19:48:48,105 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 4
+2023-04-18 19:48:48,105 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: status_report
+2023-04-18 19:48:48,105 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 5
+2023-04-18 19:48:48,105 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:48,106 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:48,106 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:48,106 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 5
+2023-04-18 19:48:48,108 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:48,108 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:48,108 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:48,116 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:48,116 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:48,117 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:48,117 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:48,117 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:48,118 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:48,118 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:48,119 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:48,119 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:48,119 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:48,120 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: poll_exit
+2023-04-18 19:48:48,120 DEBUG   SenderThread:48384 [sender.py:send():375] send: history
+2023-04-18 19:48:48,121 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: summary_record
+2023-04-18 19:48:48,121 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:48,121 DEBUG   SenderThread:48384 [sender.py:send():375] send: summary
+2023-04-18 19:48:48,121 INFO    SenderThread:48384 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-04-18 19:48:48,121 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:48,121 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 5
+2023-04-18 19:48:48,121 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 6
+2023-04-18 19:48:48,121 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:48,122 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 6
+2023-04-18 19:48:48,122 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:48,122 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 6
+2023-04-18 19:48:48,126 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: status_report
+2023-04-18 19:48:48,215 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 7
+2023-04-18 19:48:48,215 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:48,216 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 7
+2023-04-18 19:48:48,216 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:48,216 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 7
+2023-04-18 19:48:48,763 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/wandb-summary.json
+2023-04-18 19:48:48,764 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/config.yaml
+2023-04-18 19:48:49,849 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 8
+2023-04-18 19:48:49,849 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:49,849 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 8
+2023-04-18 19:48:49,850 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:49,850 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 8
+2023-04-18 19:48:49,858 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 9
+2023-04-18 19:48:49,858 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:49,859 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 9
+2023-04-18 19:48:49,859 DEBUG   SenderThread:48384 [sender.py:send():375] send: artifact
+2023-04-18 19:48:50,705 INFO    wandb-upload_1:48384 [upload_job.py:push():95] Uploaded file /home/oem/.local/share/wandb/artifacts/staging/tmp6333hrla
+2023-04-18 19:48:50,705 INFO    wandb-upload_2:48384 [upload_job.py:push():95] Uploaded file /home/oem/.local/share/wandb/artifacts/staging/tmpnlpfikau
+2023-04-18 19:48:50,721 INFO    wandb-upload_0:48384 [upload_job.py:push():95] Uploaded file /home/oem/.local/share/wandb/artifacts/staging/tmpilcb9l0a
+2023-04-18 19:48:50,765 INFO    Thread-12 :48384 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:51,400 INFO    SenderThread:48384 [sender.py:send_artifact():1474] sent artifact job-https___github.com_derekhanbaliq_RL-planner.git_pure_pursuit_ppo_continuous.py - {'id': 'QXJ0aWZhY3Q6NDI3NzQzODM2', 'digest': '27b8e9da155452a3f5a60a70e0a51ec9', 'state': 'PENDING', 'aliases': [], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjYzMDk2Njc2', 'latestArtifact': None}, 'version': 'latest'}
+2023-04-18 19:48:51,400 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:51,400 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 9
+2023-04-18 19:48:51,401 INFO    SenderThread:48384 [dir_watcher.py:finish():365] shutting down directory watcher
+2023-04-18 19:48:51,766 INFO    SenderThread:48384 [dir_watcher.py:finish():395] scan: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files
+2023-04-18 19:48:51,766 INFO    SenderThread:48384 [dir_watcher.py:finish():409] scan save: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/events.out.tfevents.1681861707.g.48268.0 events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:51,767 INFO    SenderThread:48384 [dir_watcher.py:finish():409] scan save: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/config.yaml config.yaml
+2023-04-18 19:48:51,767 INFO    SenderThread:48384 [dir_watcher.py:finish():409] scan save: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/wandb-metadata.json wandb-metadata.json
+2023-04-18 19:48:51,767 INFO    SenderThread:48384 [dir_watcher.py:finish():409] scan save: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/requirements.txt requirements.txt
+2023-04-18 19:48:51,767 INFO    SenderThread:48384 [dir_watcher.py:finish():409] scan save: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log output.log
+2023-04-18 19:48:51,767 INFO    SenderThread:48384 [dir_watcher.py:finish():409] scan save: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/diff.patch diff.patch
+2023-04-18 19:48:51,767 INFO    SenderThread:48384 [dir_watcher.py:finish():409] scan save: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/wandb-summary.json wandb-summary.json
+2023-04-18 19:48:51,768 INFO    SenderThread:48384 [dir_watcher.py:finish():409] scan save: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/code/pure_pursuit/ppo_continuous.py code/pure_pursuit/ppo_continuous.py
+2023-04-18 19:48:51,768 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 10
+2023-04-18 19:48:51,768 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:51,768 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 10
+2023-04-18 19:48:51,769 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:51,769 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 10
+2023-04-18 19:48:51,769 INFO    SenderThread:48384 [file_pusher.py:finish():168] shutting down file pusher
+2023-04-18 19:48:52,081 INFO    wandb-upload_0:48384 [upload_job.py:push():137] Uploaded file /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/wandb-summary.json
+2023-04-18 19:48:52,094 INFO    wandb-upload_4:48384 [upload_job.py:push():137] Uploaded file /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/config.yaml
+2023-04-18 19:48:52,125 INFO    wandb-upload_3:48384 [upload_job.py:push():137] Uploaded file /tmp/tmpq46kjf71wandb/m5foswp1-events.out.tfevents.1681861707.g.48268.0
+2023-04-18 19:48:52,182 INFO    wandb-upload_1:48384 [upload_job.py:push():137] Uploaded file /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/requirements.txt
+2023-04-18 19:48:52,476 INFO    wandb-upload_2:48384 [upload_job.py:push():137] Uploaded file /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/files/output.log
+2023-04-18 19:48:52,677 INFO    Thread-11 :48384 [sender.py:transition_state():626] send defer: 11
+2023-04-18 19:48:52,677 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:52,677 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 11
+2023-04-18 19:48:52,678 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:52,678 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 11
+2023-04-18 19:48:52,678 INFO    SenderThread:48384 [file_pusher.py:join():173] waiting for file pusher
+2023-04-18 19:48:52,678 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 12
+2023-04-18 19:48:52,678 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:52,678 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 12
+2023-04-18 19:48:52,678 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:52,678 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 12
+2023-04-18 19:48:52,786 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 13
+2023-04-18 19:48:52,787 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:52,787 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 13
+2023-04-18 19:48:52,787 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:52,787 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 13
+2023-04-18 19:48:52,787 INFO    SenderThread:48384 [sender.py:transition_state():626] send defer: 14
+2023-04-18 19:48:52,787 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: defer
+2023-04-18 19:48:52,787 INFO    HandlerThread:48384 [handler.py:handle_request_defer():170] handle defer: 14
+2023-04-18 19:48:52,787 DEBUG   SenderThread:48384 [sender.py:send():375] send: final
+2023-04-18 19:48:52,788 DEBUG   SenderThread:48384 [sender.py:send():375] send: footer
+2023-04-18 19:48:52,788 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: defer
+2023-04-18 19:48:52,788 INFO    SenderThread:48384 [sender.py:send_request_defer():622] handle sender defer: 14
+2023-04-18 19:48:52,788 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: poll_exit
+2023-04-18 19:48:52,788 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: poll_exit
+2023-04-18 19:48:52,789 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: server_info
+2023-04-18 19:48:52,789 DEBUG   SenderThread:48384 [sender.py:send_request():402] send_request: server_info
+2023-04-18 19:48:52,791 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: get_summary
+2023-04-18 19:48:52,792 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: sampled_history
+2023-04-18 19:48:52,848 INFO    MainThread:48384 [wandb_run.py:_footer_history_summary_info():3476] rendering history
+2023-04-18 19:48:52,848 INFO    MainThread:48384 [wandb_run.py:_footer_history_summary_info():3508] rendering summary
+2023-04-18 19:48:52,849 INFO    MainThread:48384 [wandb_run.py:_footer_sync_info():3434] logging synced files
+2023-04-18 19:48:52,849 DEBUG   HandlerThread:48384 [handler.py:handle_request():144] handle_request: shutdown
+2023-04-18 19:48:52,849 INFO    HandlerThread:48384 [handler.py:finish():845] shutting down handler
+2023-04-18 19:48:53,789 INFO    WriterThread:48384 [datastore.py:close():298] close: /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/wandb/run-20230418_194826-xdgnko6z/run-xdgnko6z.wandb
+2023-04-18 19:48:53,848 INFO    SenderThread:48384 [sender.py:finish():1550] shutting down sender
+2023-04-18 19:48:53,848 INFO    SenderThread:48384 [file_pusher.py:finish():168] shutting down file pusher
+2023-04-18 19:48:53,848 INFO    SenderThread:48384 [file_pusher.py:join():173] waiting for file pusher

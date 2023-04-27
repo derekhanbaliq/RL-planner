@@ -10,5 +10,6 @@ docs/_build/
 *.mypy_cache/
 flycheck_*
 runs/
-pure_pursuit/runs/
-pure_pursuit/wandb
+pure_pursuit/runs/*
+pure_pursuit/wandb/*
+pure_pursuit/videos/*

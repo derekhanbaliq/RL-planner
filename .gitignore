@@ -11,3 +11,4 @@ docs/_build/
 flycheck_*
 runs/
 pure_pursuit/runs/
+pure_pursuit/wandb

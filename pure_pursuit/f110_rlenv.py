@@ -10,9 +10,8 @@ from scipy.spatial import distance
 from f110_gym.envs.f110_env import F110Env
 from pure_pursuit import PurePursuit, Waypoint
 from render import Renderer
-import utils
-NUM_LIDAR_SCANS = 1080//10
-SCAN_MAX = 30
+NUM_LIDAR_SCANS = 1080
+
 class F110Env_Continuous_Planner(gym.Env):
     def __init__(self, T=1, **kargs):
         self.T = T
@@ -39,32 +38,29 @@ class F110Env_Continuous_Planner(gym.Env):
         self.opponent_controller = PurePursuit(self.opponent_waypoints)
         self.main_renderer = Renderer(self.main_waypoints)
         self.opponent_renderer = Renderer(self.opponent_waypoints)
-        self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=1)
+        #self.next_render = Renderer(self.main_waypoints)
+        self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=2)
         # steer, speed
         
         self.action_space = spaces.Box(low=-1 * np.ones((self.T, )), high=np.ones((self.T, ))) # action ==> x-offset
-        # self.action_space = spaces.Discrete(9, start=-4)
-        # self.action_space = spaces.MultiDiscrete(9*np.ones((self.T, )))
-
-        low = np.concatenate((-1*np.ones((2, 1)), np.zeros((1, 1)), np.zeros((NUM_LIDAR_SCANS, 1)), np.array([-1, -1]* self.T).reshape(-1, 1))) # (lidar_scans, pointX, pointY,)
-        high = np.concatenate((1*np.ones((2, 1)), 1 * np.ones((1, 1)),  1 * np.ones((NUM_LIDAR_SCANS, 1)), np.array([1, 1]* self.T).reshape(-1, 1))) # (lidar_scans, pointX, pointY,)
+        self.action_size = self.action_space.shape[0]
+        # lidar_obs_shape = (NUM_LIDAR_SCANS, 1)
+        low = np.concatenate((-100*np.ones((2, 1)), np.zeros((1, 1)), np.zeros((NUM_LIDAR_SCANS, 1)), np.array([-1, -1]* self.T).reshape(-1, 1))) # (lidar_scans, pointX, pointY,)
+        high = np.concatenate((100*np.ones((2, 1)), 2*np.pi * np.ones((1, 1)),  1000 * np.ones((NUM_LIDAR_SCANS, 1)), np.array([1, 1]* self.T).reshape(-1, 1))) # (lidar_scans, pointX, pointY,)
         
         self.observation_space = spaces.Box(low, high, shape=self.obs_shape)
         self.reward_range = (-10, 10)
         self.metadata = {}
         self.lap_time = 0
-        self.prev_action = None
-        self.action_diff_penalty = 1
 
     def reset(self, **kwargs):
         if "seed" in kwargs:
             self.seed(kwargs["seed"])
         main_agent_init_pos = np.array([self.yaml_config['init_pos']])
-        # opponent_init_pos = main_agent_init_pos + np.array([0, 1, 0]) # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
-        # init_pos = np.vstack((main_agent_init_pos, opponent_init_pos))
+        opponent_init_pos = main_agent_init_pos + np.array([0, 1, 0]) # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
+        init_pos = np.vstack((main_agent_init_pos, opponent_init_pos))
         self.lap_time = 0
-        self.prev_action = None
-        raw_obs, _, done, _ = self.f110.reset(main_agent_init_pos)
+        raw_obs, _, done, _ = self.f110.reset(init_pos)
         self.prev_raw_obs = raw_obs
         obs = self._get_obs(raw_obs)
         self.prev_obs = obs
@@ -78,31 +74,27 @@ class F110Env_Continuous_Planner(gym.Env):
         action: nd.array => x-offset + original traj of length (self.T, 1)
         """
         # TODO: spline points of horizon T
-        if self.T > 1:
-            control_action = action[0]
-        elif self.T == 1:
-            control_action = action
-        else:
-            raise IndexError("T <= 0")
-        if isinstance(self.action_space, gym.spaces.Discrete):
-            action -= 4
-            action /= 4
+        # print("action: ", action)
         R = lambda theta: np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]])
         axis = np.array([0, 1]).reshape(-1, 1)
-        # control_action = 0.0
-        # print("action: ", action)
-        rotated_offset = R(self.prev_raw_obs['poses_theta'][0]) @ axis * control_action
-        # print(f"action: {action}, rotated_offset: {rotated_offset[:, 0]}")
+        rotated_offset = R(self.prev_raw_obs['poses_theta'][0]) @ axis * action
+        print(f"action: {action}, rotated_offset: {rotated_offset}")
 
         main_speed, main_steering = self.main_controller.control(obs=self.prev_raw_obs, agent=1, offset=rotated_offset[:, 0])
-        # opponent_speed, opponent_steering = self.opponent_controller.control(obs=self.prev_raw_obs, agent=2)
+        opponent_speed, opponent_steering = self.opponent_controller.control(obs=self.prev_raw_obs, agent=2)
         main_agent_steer_speed = np.array([[main_steering, main_speed]])
-        # opponent_steer_speed = np.array([[opponent_steering, opponent_speed]])
+        opponent_steer_speed = np.array([[opponent_steering, opponent_speed]])
 
-        # steer_speed = np.vstack((main_agent_steer_speed, opponent_steer_speed))
+        steer_speed = np.vstack((main_agent_steer_speed, opponent_steer_speed))
         # print(steer_speed)
 
-        raw_obs, time, done, info = self.f110.step(main_agent_steer_speed)
+        '''
+        at time t
+        '''
+        raw_obs, time, done, info = self.f110.step(steer_speed)
+        ''' 
+        at time t+1
+        '''
         self.lap_time += time
         self.prev_raw_obs = raw_obs
         obs = self._get_obs(raw_obs)
@@ -111,13 +103,10 @@ class F110Env_Continuous_Planner(gym.Env):
         reward = -1 # control cost
         if self.f110.collisions[0] == 1:
             # print("collided: ", done, info)
-            reward -= 100
+            reward -= 1
         else:
             reward += 1
-        reward += self.lap_time # np.exp(-self.lap_time)/1000
-        action_diff = np.abs(action[:-1] - action[1:])
-        reward -= self.action_diff_penalty * np.sum(action_diff)
-
+        # reward += self.lap_time
         
         # TODO
         # reward = self.get_reward()
@@ -130,7 +119,9 @@ class F110Env_Continuous_Planner(gym.Env):
         obs = np.zeros(self.obs_shape)
         if isinstance(raw_obs, tuple):
             raw_obs = raw_obs[0]
-        # scans = raw_obs['scans'][0].reshape(-1, 1)
+        # print('agent 1: ', raw_obs['poses_x'][0], raw_obs['poses_y'][0], np.rad2deg(raw_obs['poses_theta'][0]))
+        # print('agent 2: ', raw_obs['poses_x'][1], raw_obs['poses_y'][1])
+        scans = raw_obs['scans'][0].reshape(-1, 1)
         # negative_distance, positive_distance = 0, 0
         # angle_increment = 360/NUM_LIDAR_SCANS
         # angles = np.deg2rad(np.arange(0, 360, angle_increment))
@@ -140,31 +131,15 @@ class F110Env_Continuous_Planner(gym.Env):
         # print("distance: ", negative_distance, positive_distance)
         # print("sum: ", negative_distance + positive_distance)
         currPos = np.array([raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
-        currPos[:1] /= 100
-        currPos[-1] /= (2*np.pi)
+        # xmax, xmin = self.main_waypoints.max(axis=0), self.main_waypoints.min(axis=0)
+        # ymax, ymin = self.main_waypoints.max(axis=1), self.main_waypoints.min(axis=1)
+        # thetamax, thetamin = 2*np.pi, 0
+
         obs[:3] = currPos.reshape(-1, 1)
-        scans = utils.downsample(raw_obs['scans'][0], NUM_LIDAR_SCANS, 'simple')
-        scans = np.clip(scans, 0, SCAN_MAX)
-        scans /= SCAN_MAX
-        obs[3:NUM_LIDAR_SCANS+3, :] = scans.reshape(-1, 1)
-        def normalize(pt, min, max):
-            pt = (pt - min)/(max - min)
-            pt = pt * 2 - 1
-            return pt
-        
+        obs[3:NUM_LIDAR_SCANS+3, :] = scans
         targetPoint, idx  = self.main_controller.get_target_waypoint(self.prev_raw_obs, agent=1)
-        targetPoint[0] = normalize(targetPoint[0], self.main_controller.waypoints[:, 0].min(), self.main_controller.waypoints[:, 0].max())
-        targetPoint[1] = normalize(targetPoint[1], self.main_controller.waypoints[:, 1].min(), self.main_controller.waypoints[:, 1].max())
-        for i in range(self.T):
-            start_idx = NUM_LIDAR_SCANS+3+i*2
-            end_idx = start_idx + 2
-            if i == 0:
-                obs[start_idx:end_idx, :] = targetPoint.reshape(-1, 1)
-            else:
-                wp = self.main_controller.waypoints[idx + i]
-                wp[0] = normalize(wp[0], self.main_controller.waypoints[:, 0].min(), self.main_controller.waypoints[:, 0].max())
-                wp[1] = normalize(wp[1], self.main_controller.waypoints[:, 1].min(), self.main_controller.waypoints[:, 1].max())
-                obs[start_idx:end_idx, :] = wp.reshape(-1, 1)
+        print("target point:", targetPoint)
+        obs[-2:, :] = targetPoint.reshape(-1, 1)
         return obs
     
     def render(self, mode, **kwargs):

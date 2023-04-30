@@ -30,6 +30,19 @@ class Renderer:
             else:
                 self.drawn_waypoints[i].vertices = [scaled_points[i, 0], scaled_points[i, 1], 0.]
 
+    def render_point(self, e):
+        """
+        draw one point
+        """
+        points = np.vstack((self.waypoints.x, self.waypoints.y)).T  # N x 2
+
+        scaled_points = 50. * points
+
+        b = e.batch.add(1, GL_POINTS, None, ('v3f/stream', [scaled_points[5, 0], scaled_points[5, 1], 0.]),
+                        ('c3B/stream', [255, 255, 255]))
+        print("x:", scaled_points[5, 0])
+        print("y:", scaled_points[5, 0])
+
     def load_obs(self, obs):
         self.obs = obs
 

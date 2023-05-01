@@ -83,12 +83,12 @@ def parse_args():
 def make_env(env_id, idx, capture_video, run_name, gamma):
 
     def thunk():
-        # env = F110Env_Continuous_Planner()
         env = F110Env_Continuous_Planner()
         
         if capture_video:
             env.f110.add_render_callback(env.opponent_renderer.render_waypoints)
             env.f110.add_render_callback(env.main_renderer.render_waypoints)
+
         
         env = gym.wrappers.FlattenObservation(env)  # deal with dm_control's Dict observation space
         env = gym.wrappers.RecordEpisodeStatistics(env)
@@ -225,7 +225,7 @@ if __name__ == "__main__":
             rewards[step] = torch.tensor(reward).to(device).view(-1)
             next_obs, next_done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
             if args.render:
-                envs.envs[0].render(mode='human_fast')
+                envs.envs[0].render(mode='human')
 
             # Only print when at least 1 env is done
             # if "final_info" not in infos:

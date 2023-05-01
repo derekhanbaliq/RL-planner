@@ -70,6 +70,8 @@ def parse_args():
         help="the maximum norm for the gradient clipping")
     parser.add_argument("--target-kl", type=float, default=None,
         help="the target KL divergence threshold")
+    parser.add_argument("--time-horizon", "--t", type=int, default=1,
+        help="time horizon for predicting trajectory")
     args = parser.parse_args()
     args.batch_size = int(args.num_envs * args.num_steps)
     args.minibatch_size = int(args.batch_size // args.num_minibatches)
@@ -220,7 +222,7 @@ if __name__ == "__main__":
             next_obs, reward, done, infos = envs.step(action.cpu().numpy())
             rewards[step] = torch.tensor(reward).to(device).view(-1)
             next_obs, next_done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
-            envs.envs[0].render(mode='human_fast')
+            # envs.envs[0].render(mode='human_fast')
 
             # Only print when at least 1 env is done
             # if "final_info" not in infos:
@@ -317,13 +319,13 @@ if __name__ == "__main__":
         var_y = np.var(y_true)
         explained_var = np.nan if var_y == 0 else 1 - np.var(y_true - y_pred) / var_y
 
-        if num_updates % (num_updates//10) == 0:
+        if update % (num_updates//10) == 0:
             torch.save({
                 'num_updates': num_updates,
                 'model_state_dict': agent.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
                 'loss': loss,
-                }, f"runs/{run_name}/{num_updates}_model.pt")
+                }, f"runs/{run_name}/{update}_model.pt")
 
         # TRY NOT TO MODIFY: record rewards for plotting purposes
         writer.add_scalar("charts/learning_rate", optimizer.param_groups[0]["lr"], global_step)

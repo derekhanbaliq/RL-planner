@@ -109,7 +109,7 @@ class F110Env_Continuous_Planner(gym.Env):
             reward -= 1
         else:
             reward += 1
-        # reward += self.lap_time
+        reward += self.lap_time/1000
         
         # TODO
         # reward = self.get_reward()

@@ -9,11 +9,12 @@ from pyglet.gl import GL_POINTS  # game interface
 
 class Renderer:
 
-    def __init__(self, waypoints):
+    def __init__(self, waypoints, T):
         self.waypoints = waypoints
         self.drawn_waypoints = []
         self.obs = None
-        self.prev_points = [0.0, 0.0]
+        self.T = T
+        self.prev_points = np.zeros((self.T, 2))
 
     def render_waypoints(self, e):
         """
@@ -31,40 +32,61 @@ class Renderer:
             else:
                 self.drawn_waypoints[i].vertices = [scaled_points[i, 0], scaled_points[i, 1], 0.]
 
+    def draw_point(self, e, pp, color): # [4, 30, 91]
+        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [pp[0], pp[1], 0.]),
+                    ('c3B/stream', color))
+        # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [pp[0] + 1, pp[1], 0.]),
+        #             ('c3B/stream', color))
+        # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [pp[0], pp[1] + 1, 0.]),
+        #             ('c3B/stream', color))
+        # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [pp[0] - 1, pp[1], 0.]),
+        #             ('c3B/stream', color))
+        # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [pp[0], pp[1] - 1, 0.]),
+        #             ('c3B/stream', color))
+        # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [pp[0] + 1, pp[1] + 1, 0.]),
+        #             ('c3B/stream', color))
+        # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [pp[0] - 1, pp[1] - 1, 0.]),
+        #             ('c3B/stream', color))
+        # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [pp[0] - 1, pp[1] + 1, 0.]),
+        #             ('c3B/stream', color))
+        # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [pp[0] + 1, pp[1] - 1, 0.]),
+        #             ('c3B/stream', color))
+
     def render_point(self, e):
         """
         draw one point
         """
         tp = self.target_points * 50.0
-        # erase previous target points
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.prev_points[0], self.prev_points[1], 0.]), ('c3B/stream', [4, 30, 91]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.prev_points[0] + 1, self.prev_points[1], 0.]), ('c3B/stream', [4, 30, 91]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.prev_points[0], self.prev_points[1] + 1, 0.]), ('c3B/stream', [4, 30, 91]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.prev_points[0] - 1, self.prev_points[1], 0.]), ('c3B/stream', [4, 30, 91]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.prev_points[0], self.prev_points[1] - 1, 0.]), ('c3B/stream', [4, 30, 91]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.prev_points[0] + 1, self.prev_points[1] + 1, 0.]), ('c3B/stream', [4, 30, 91]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.prev_points[0] - 1, self.prev_points[1] - 1, 0.]), ('c3B/stream', [4, 30, 91]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.prev_points[0] - 1, self.prev_points[1] + 1, 0.]), ('c3B/stream', [4, 30, 91]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.prev_points[0] + 1, self.prev_points[1] - 1, 0.]), ('c3B/stream', [4, 30, 91]))
+        # i = 0
+        print("T:", self.T)
 
-        # plot target point
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[0], tp[1], 0.]),('c3B/stream', [255, 0, 0]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[0]+1, tp[1], 0.]), ('c3B/stream', [255, 0, 0]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[0], tp[1]+1, 0.]), ('c3B/stream', [255, 0, 0]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[0]-1, tp[1], 0.]), ('c3B/stream', [255, 0, 0]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[0], tp[1]-1, 0.]), ('c3B/stream', [255, 0, 0]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[0]+1, tp[1]+1, 0.]), ('c3B/stream', [255, 0, 0]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[0]-1, tp[1]-1, 0.]), ('c3B/stream', [255, 0, 0]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[0]-1, tp[1]+1, 0.]), ('c3B/stream', [255, 0, 0]))
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[0]+1, tp[1]-1, 0.]), ('c3B/stream', [255, 0, 0]))
+        for index in range(self.T):
+            # erase previous target points
+            # i = index * 2
+            # print("index is:", i)
+            print(self.prev_points[index])
+            self.draw_point(e, self.prev_points[index], [4, 30, 91])
 
-        # plot current pose
-        #e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.current_pose[0] * 50.0, self.current_pose[1] * 50.0, 0.]),('c3B/stream', [255, 255, 255]))
+        for index in range(self.T):
+            # plot target point
+            # i = index * 2
+            print(tp[index])
+            self.draw_point(e, tp[index], [255, 0, 0])
+
+            # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[i], tp[i+1], 0.]),('c3B/stream', [255, 0, 0]))
+            # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[i]+1, tp[i+1], 0.]), ('c3B/stream', [255, 0, 0]))
+            # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[i], tp[i+1]+1, 0.]), ('c3B/stream', [255, 0, 0]))
+            # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[i]-1, tp[i+1], 0.]), ('c3B/stream', [255, 0, 0]))
+            # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[i], tp[i+1]-1, 0.]), ('c3B/stream', [255, 0, 0]))
+            # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[i]+1, tp[i+1]+1, 0.]), ('c3B/stream', [255, 0, 0]))
+            # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[i]-1, tp[i+1]-1, 0.]), ('c3B/stream', [255, 0, 0]))
+            # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[i]-1, tp[i+1]+1, 0.]), ('c3B/stream', [255, 0, 0]))
+            # e.batch.add(1, GL_POINTS, None, ('v3f/stream', [tp[i]+1, tp[i+1]-1, 0.]), ('c3B/stream', ))
+
         self.prev_points = tp
 
-    def load_target_point(self, current_pose, target_points, offsets):
-        self.target_points = target_points[-2:,:] + offsets
-        self.current_pose = current_pose
+    def load_target_point(self, target_points, offsets):
+        self.target_points = target_points[:, :2] + offsets
 
 
     def load_obs(self, obs):

@@ -25,7 +25,7 @@ class PurePursuit:
     def __init__(self, waypoints):
         self.is_clockwise = False
 
-        self.waypoints = np.array([waypoints.x, waypoints.y]).T
+        self.waypoints = np.array([waypoints.x, waypoints.y, waypoints.θ]).T
         self.numWaypoints = self.waypoints.shape[0]
         self.ref_speed = np.ones_like(waypoints.v)
 
@@ -40,7 +40,7 @@ class PurePursuit:
         self.currPos = np.array([self.currX, self.currY]).reshape((1, 2))
 
         # Find closest waypoint to where we are
-        self.distances = distance.cdist(self.currPos, self.waypoints, 'euclidean').reshape((self.numWaypoints))
+        self.distances = distance.cdist(self.currPos, self.waypoints[:, :2], 'euclidean').reshape((self.numWaypoints))
         self.closest_index = np.argmin(self.distances)
 
         # Find target point
@@ -56,18 +56,18 @@ class PurePursuit:
         self.currPos = np.array([self.currX, self.currY]).reshape((1, 2))
 
         # Find closest waypoint to where we are
-        self.distances = distance.cdist(self.currPos, self.waypoints, 'euclidean').reshape((self.numWaypoints,))
+        self.distances = distance.cdist(self.currPos, self.waypoints[:, :2], 'euclidean').reshape((self.numWaypoints,))
         self.closest_index = np.argmin(self.distances)
 
         # Find target point
         targetPoint, target_point_index = self.get_closest_point_beyond_lookahead_dist(self.L)
 
         if isinstance(offset, np.ndarray):  # agent == 1:
-            targetPoint = targetPoint + offset  # += is not overwritten by np!
+            targetPoint[:2] = targetPoint[:2] + offset  # += is not overwritten by np!
 
         # calculate steering angle / curvature
         waypoint_y = np.dot(np.array([np.sin(-obs['poses_theta'][agent - 1]), np.cos(-obs['poses_theta'][agent - 1])]),
-                            targetPoint - np.array([self.currX, self.currY]))
+                            targetPoint[:2] - np.array([self.currX, self.currY]))
         gamma = self.steering_gain * 2.0 * waypoint_y / self.L ** 2
         steering_angle = gamma
         # radius = 1 / (2.0 * waypoint_y / self.L ** 2)

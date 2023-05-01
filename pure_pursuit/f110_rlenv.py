@@ -13,9 +13,9 @@ from render import Renderer
 NUM_LIDAR_SCANS = 1080
 
 class F110Env_Continuous_Planner(gym.Env):
-    def __init__(self, T=1, **kargs):
+    def __init__(self, T=20, **kargs):
         self.T = T
-        self.obs_shape = (3 + NUM_LIDAR_SCANS + self.T * 2, 1)
+        self.obs_shape = (3 + NUM_LIDAR_SCANS + self.T * 3, 1)
         
         map_name = 'levine'  # Spielberg, example, MoscowRaceway, Catalunya -- need further tuning
         try:
@@ -37,16 +37,16 @@ class F110Env_Continuous_Planner(gym.Env):
         # load controller
         self.main_controller = PurePursuit(self.main_waypoints)
         self.opponent_controller = PurePursuit(self.opponent_waypoints)
-        self.main_renderer = Renderer(self.main_waypoints)
-        self.opponent_renderer = Renderer(self.opponent_waypoints)
+        self.main_renderer = Renderer(self.main_waypoints, self.T)
+        self.opponent_renderer = Renderer(self.opponent_waypoints, self.T)
         self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=1) #4
         # steer, speed
         
         self.action_space = spaces.Box(low=-1 * np.ones((self.T, )), high=np.ones((self.T, ))) # action ==> x-offset
         self.action_size = self.action_space.shape[0]
         # lidar_obs_shape = (NUM_LIDAR_SCANS, 1)
-        low = np.concatenate((-100*np.ones((2, 1)), np.zeros((1, 1)), np.zeros((NUM_LIDAR_SCANS, 1)), np.array([-1, -1]* self.T).reshape(-1, 1))) # (lidar_scans, pointX, pointY,)
-        high = np.concatenate((100*np.ones((2, 1)), 2*np.pi * np.ones((1, 1)),  1000 * np.ones((NUM_LIDAR_SCANS, 1)), np.array([1, 1]* self.T).reshape(-1, 1))) # (lidar_scans, pointX, pointY,)
+        low = np.concatenate((-100*np.ones((2, 1)), np.zeros((1, 1)), np.zeros((NUM_LIDAR_SCANS, 1)), np.array([-1, -1, 0]* self.T).reshape(-1, 1))) # (lidar_scans, pointX, pointY,)
+        high = np.concatenate((100*np.ones((2, 1)), 2*np.pi * np.ones((1, 1)),  1000 * np.ones((NUM_LIDAR_SCANS, 1)), np.array([1, 1, 2*np.pi]* self.T).reshape(-1, 1))) # (lidar_scans, pointX, pointY,)
         
         self.observation_space = spaces.Box(low, high, shape=self.obs_shape)
         self.reward_range = (-10, 10)
@@ -78,11 +78,18 @@ class F110Env_Continuous_Planner(gym.Env):
         """
         # TODO: spline points of horizon T
         # print("action: ", action)
+        if self.T > 1:
+            control_action = action[0]
+        elif self.T == 1:
+            control_action = action
+        else:
+            raise IndexError("T <= 0")
         R = lambda theta: np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]])
         axis = np.array([0, 1]).reshape(-1, 1)
         # translation from
-        rotated_offset = R(self.prev_raw_obs['poses_theta'][0]) @ axis * action
-        # print(f"action: {action}, rotated_offset: {rotated_offset}")
+        rotated_offset = R(self.prev_raw_obs['poses_theta'][0]) @ axis * control_action
+        print(f"action: {action}, rotated_offset: {rotated_offset}")
+
 
         main_speed, main_steering = self.main_controller.control(obs=self.prev_raw_obs, agent=1, offset=rotated_offset[:, 0])
         # opponent_speed, opponent_steering = self.opponent_controller.control(obs=self.prev_raw_obs, agent=2)
@@ -97,7 +104,17 @@ class F110Env_Continuous_Planner(gym.Env):
         '''
         at time t
         '''
-        self.main_renderer.load_target_point(self.currPos, self.prev_obs, rotated_offset)
+        # action = action.reshape(-1, 1)
+        target_points = self.prev_obs[-(self.T * 3):]
+        offsets = [rotated_offset]
+        for i in range(1, self.T):
+            idx = 3 * i + 2
+            print(idx)
+            heading = target_points[idx]
+            o = R(heading.item()) @ axis * action[i]
+            offsets.append(o)
+        offsets = np.concatenate(offsets).reshape(-1, 2)
+        self.main_renderer.load_target_point(self.prev_obs[-(self.T*3):].reshape(-1, 3), offsets)
         self.f110.add_render_callback(self.main_renderer.render_point)
         raw_obs, time, done, info = self.f110.step(steer_speed)
         ''' 
@@ -147,7 +164,16 @@ class F110Env_Continuous_Planner(gym.Env):
         obs[3:NUM_LIDAR_SCANS+3, :] = scans
         targetPoint, idx  = self.main_controller.get_target_waypoint(self.prev_raw_obs, agent=1)
         # print("target point:", targetPoint)
-        obs[-2:, :] = targetPoint.reshape(-1, 1)
+        for i in range(self.T):
+            start_idx = NUM_LIDAR_SCANS + 3 + i * 3
+            end_idx = start_idx + 3
+            if i == 0:
+                obs[start_idx:end_idx, :] = targetPoint.reshape(-1, 1)
+            else:
+                wp = self.main_controller.waypoints[idx + i]
+                obs[start_idx:end_idx, :] = wp.reshape(-1, 1)
+
+        # obs[-2:, :] = targetPoint.reshape(-1, 1)
         return obs
     
     def render(self, mode, **kwargs):

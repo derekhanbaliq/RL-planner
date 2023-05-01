@@ -36,12 +36,12 @@ class Renderer:
         """
 
         # plot target point
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.target_points[0] * 50.0, self.target_points[1] * 50.0, 0.]),('c3B/stream', [255, 255, 255]))
+        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.target_points[0] * 50.0, self.target_points[1] * 50.0, 0.]),('c3B/stream', [255, 0, 0]))
         # plot current pose
-        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.current_pose[0] * 50.0, self.current_pose[1] * 50.0, 0.]),('c3B/stream', [255, 255, 255]))
+        #e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.current_pose[0] * 50.0, self.current_pose[1] * 50.0, 0.]),('c3B/stream', [255, 255, 255]))
 
     def load_target_point(self, current_pose, target_points, offsets):
-        self.target_points = target_points[-2:,:] # + offsets
+        self.target_points = target_points[-2:,:] + offsets
         self.current_pose = current_pose
 
 

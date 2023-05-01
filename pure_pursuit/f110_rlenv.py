@@ -81,7 +81,7 @@ class F110Env_Continuous_Planner(gym.Env):
         rotated_offset = R(self.prev_raw_obs['poses_theta'][0]) @ axis * action
         # print(f"action: {action}, rotated_offset: {rotated_offset}")
 
-        main_speed, main_steering = self.main_controller.control(obs=self.prev_raw_obs, agent=1, offset=np.array([0.2, 0.2])) #rotated_offset[:, 0])
+        main_speed, main_steering = self.main_controller.control(obs=self.prev_raw_obs, agent=1, offset=rotated_offset[:, 0])
         opponent_speed, opponent_steering = self.opponent_controller.control(obs=self.prev_raw_obs, agent=2)
         main_agent_steer_speed = np.array([[main_steering, main_speed]])
         opponent_steer_speed = np.array([[opponent_steering, opponent_speed]])

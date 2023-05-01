@@ -56,6 +56,7 @@ class F110Env_Continuous_Planner(gym.Env):
         self.observation_space = spaces.Box(low, high, shape=self.obs_shape)
         self.reward_range = (-10, 10)
         self.metadata = {}
+        self.currPos = None
         self.lap_time = 0
         self.currPos = None
         self.lap_time = 0
@@ -66,11 +67,14 @@ class F110Env_Continuous_Planner(gym.Env):
         if "seed" in kwargs:
             self.seed(kwargs["seed"])
         main_agent_init_pos = np.array([self.yaml_config['init_pos']])
-        #obstacle_1_pos = main_agent_init_pos + np.array([0.2, 1, 0]) # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
-        #obstacle_2_pos = np.array([-20.84029965293181,0.46567655312,-1.55179939197938]) - np.array([0.2, 0, 0])
-        #obstacle_3_pos = np.array([-1.40574936548874,-0.061268582499999,0.027619392342517]) - np.array([-0.2, 0, 0])
-        #init_pos = np.vstack((main_agent_init_pos, obstacle_1_pos, obstacle_2_pos, obstacle_3_pos))
-        init_pos = main_agent_init_pos
+        obs_offset = np.array([0.2, 0, 0])
+        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
+        obstacle_1_pos = np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]) + obs_offset # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
+        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
+        obstacle_2_pos = np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]) + obs_offset
+        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
+        obstacle_3_pos = np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]) + obs_offset
+        init_pos = np.vstack((main_agent_init_pos, obstacle_1_pos, obstacle_2_pos, obstacle_3_pos))
         self.lap_time = 0
         self.dist = 0
         raw_obs, _, done, _ = self.f110.reset(init_pos)

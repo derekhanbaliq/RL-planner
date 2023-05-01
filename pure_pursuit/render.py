@@ -30,6 +30,21 @@ class Renderer:
             else:
                 self.drawn_waypoints[i].vertices = [scaled_points[i, 0], scaled_points[i, 1], 0.]
 
+    def render_point(self, e):
+        """
+        draw one point
+        """
+
+        # plot target point
+        e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.target_points[0] * 50.0, self.target_points[1] * 50.0, 0.]),('c3B/stream', [255, 0, 0]))
+        # plot current pose
+        #e.batch.add(1, GL_POINTS, None, ('v3f/stream', [self.current_pose[0] * 50.0, self.current_pose[1] * 50.0, 0.]),('c3B/stream', [255, 255, 255]))
+
+    def load_target_point(self, current_pose, target_points, offsets):
+        self.target_points = target_points[-2:,:] + offsets
+        self.current_pose = current_pose
+
+
     def load_obs(self, obs):
         self.obs = obs
 

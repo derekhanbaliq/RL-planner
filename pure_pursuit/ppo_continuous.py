@@ -14,7 +14,6 @@ from torch.distributions.normal import Normal
 from torch.utils.tensorboard import SummaryWriter
 
 from f110_rlenv import F110Env_Continuous_Planner
-gym.logger.set_level(gym.logger.DEBUG)
 
 def parse_args():
     # fmt: off
@@ -71,8 +70,6 @@ def parse_args():
         help="the maximum norm for the gradient clipping")
     parser.add_argument("--target-kl", type=float, default=None,
         help="the target KL divergence threshold")
-    parser.add_argument("--time-horizon", "--t", type=int, default=1,
-        help="time horizon for predicting trajectory")
     args = parser.parse_args()
     args.batch_size = int(args.num_envs * args.num_steps)
     args.minibatch_size = int(args.batch_size // args.num_minibatches)
@@ -83,11 +80,11 @@ def make_env(env_id, idx, capture_video, run_name, gamma):
 
     def thunk():
         # env = F110Env_Continuous_Planner()
-        env = F110Env_Continuous_Planner(T=args.time_horizon)
+        env = F110Env_Continuous_Planner()
         
         if capture_video:
-            env.f110.add_render_callback(env.main_renderer.render_waypoints)
             env.f110.add_render_callback(env.opponent_renderer.render_waypoints)
+            env.f110.add_render_callback(env.main_renderer.render_waypoints)
         
         env = gym.wrappers.FlattenObservation(env)  # deal with dm_control's Dict observation space
         env = gym.wrappers.RecordEpisodeStatistics(env)
@@ -223,7 +220,7 @@ if __name__ == "__main__":
             next_obs, reward, done, infos = envs.step(action.cpu().numpy())
             rewards[step] = torch.tensor(reward).to(device).view(-1)
             next_obs, next_done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
-            # envs.envs[0].render(mode='human')
+            envs.envs[0].render(mode='human_fast')
 
             # Only print when at least 1 env is done
             # if "final_info" not in infos:
@@ -319,13 +316,14 @@ if __name__ == "__main__":
         y_pred, y_true = b_values.cpu().numpy(), b_returns.cpu().numpy()
         var_y = np.var(y_true)
         explained_var = np.nan if var_y == 0 else 1 - np.var(y_true - y_pred) / var_y
-        if update % (num_updates//10) == 0:
+
+        if num_updates % (num_updates//10) == 0:
             torch.save({
                 'num_updates': num_updates,
                 'model_state_dict': agent.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
                 'loss': loss,
-                }, f"runs/{run_name}/{update}_model.pt")
+                }, f"runs/{run_name}/{num_updates}_model.pt")
 
         # TRY NOT TO MODIFY: record rewards for plotting purposes
         writer.add_scalar("charts/learning_rate", optimizer.param_groups[0]["lr"], global_step)

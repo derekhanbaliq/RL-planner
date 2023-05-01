@@ -51,18 +51,25 @@ class F110Env_Continuous_Planner(gym.Env):
         self.observation_space = spaces.Box(low, high, shape=self.obs_shape)
         self.reward_range = (-10, 10)
         self.metadata = {}
+        self.currPos = None
         self.lap_time = 0
+        self.action_diff_penalty = 2
+        self.dist = 0
 
     def reset(self, **kwargs):
         if "seed" in kwargs:
             self.seed(kwargs["seed"])
         main_agent_init_pos = np.array([self.yaml_config['init_pos']])
-        #obstacle_1_pos = main_agent_init_pos + np.array([0.2, 1, 0]) # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
-        #obstacle_2_pos = np.array([-20.84029965293181,0.46567655312,-1.55179939197938]) - np.array([0.2, 0, 0])
-        #obstacle_3_pos = np.array([-1.40574936548874,-0.061268582499999,0.027619392342517]) - np.array([-0.2, 0, 0])
-        #init_pos = np.vstack((main_agent_init_pos, obstacle_1_pos, obstacle_2_pos, obstacle_3_pos))
-        init_pos = main_agent_init_pos
+        obs_offset = np.array([0.2, 0, 0])
+        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
+        obstacle_1_pos = np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]) + obs_offset # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
+        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
+        obstacle_2_pos = np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]) + obs_offset
+        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
+        obstacle_3_pos = np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]) + obs_offset
+        init_pos = np.vstack((main_agent_init_pos, obstacle_1_pos, obstacle_2_pos, obstacle_3_pos))
         self.lap_time = 0
+        self.dist = 0
         raw_obs, _, done, _ = self.f110.reset(init_pos)
         self.prev_raw_obs = raw_obs
         obs = self._get_obs(raw_obs)
@@ -120,9 +127,7 @@ class F110Env_Continuous_Planner(gym.Env):
         at time t+1
         '''
         self.lap_time += time
-        self.prev_raw_obs = raw_obs
-        obs = self._get_obs(raw_obs)
-        self.prev_obs = obs
+        
         # print(reward, info, self.f110.collisions)
         reward = -1 # control cost
         if self.f110.collisions[0] == 1:
@@ -130,8 +135,15 @@ class F110Env_Continuous_Planner(gym.Env):
             reward -= 1
         else:
             reward += 1
-        reward += self.lap_time/1000
-        
+        self.dist += np.linalg.norm(self.currPos[:2] - self.prevPos[:2])
+        reward += (self.dist/self.lap_time)/1000
+        if self.T > 1:
+            action_diff = np.abs(action[:-1] - action[1:])
+            reward -= self.action_diff_penalty * np.sum(action_diff)
+        # print(reward)
+        self.prev_raw_obs = raw_obs
+        obs = self._get_obs(raw_obs)
+        self.prev_obs = obs
         # TODO
         # reward = self.get_reward()
 
@@ -154,7 +166,9 @@ class F110Env_Continuous_Planner(gym.Env):
         # positive_distance = scans[0]
         # print("distance: ", negative_distance, positive_distance)
         # print("sum: ", negative_distance + positive_distance)
+        self.prevPos = self.currPos if isinstance(self.currPos, np.ndarray) else np.array([raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
         self.currPos = np.array([raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
+        
         # xmax, xmin = self.main_waypoints.max(axis=0), self.main_waypoints.min(axis=0)
         # ymax, ymin = self.main_waypoints.max(axis=1), self.main_waypoints.min(axis=1)
         # thetamax, thetamin = 2*np.pi, 0

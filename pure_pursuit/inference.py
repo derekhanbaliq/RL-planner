@@ -84,7 +84,7 @@ if __name__ == "__main__":
     # envs = make_env()()
     # assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
     
-    model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1682911130/24_model.pt"
+    model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1682915252/610_model.pt"
 
     agent = Agent(envs).to(device)
     model = torch.load(model_path)
@@ -107,4 +107,4 @@ if __name__ == "__main__":
             # TRY NOT TO MODIFY: execute the game and log data.
             next_obs, reward, done, infos = envs.step(action.cpu().numpy())
             next_obs, done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
-            envs.envs[0].render(mode='human')
+            envs.envs[0].render(mode='human_fast')

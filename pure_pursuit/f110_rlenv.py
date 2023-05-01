@@ -32,13 +32,13 @@ class F110Env_Continuous_Planner(gym.Env):
 
         self.main_waypoints = Waypoint(csv_data)   # process these with RL
         self.opponent_waypoints = Waypoint(csv_data)
+        self.rotated_offset = [0.0, 0.0]
 
         # load controller
         self.main_controller = PurePursuit(self.main_waypoints)
         self.opponent_controller = PurePursuit(self.opponent_waypoints)
         self.main_renderer = Renderer(self.main_waypoints)
         self.opponent_renderer = Renderer(self.opponent_waypoints)
-        #self.next_render = Renderer(self.main_waypoints)
         self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=2)
         # steer, speed
         
@@ -77,10 +77,11 @@ class F110Env_Continuous_Planner(gym.Env):
         # print("action: ", action)
         R = lambda theta: np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]])
         axis = np.array([0, 1]).reshape(-1, 1)
+        # translation from
         rotated_offset = R(self.prev_raw_obs['poses_theta'][0]) @ axis * action
         print(f"action: {action}, rotated_offset: {rotated_offset}")
 
-        main_speed, main_steering = self.main_controller.control(obs=self.prev_raw_obs, agent=1, offset=rotated_offset[:, 0])
+        main_speed, main_steering = self.main_controller.control(obs=self.prev_raw_obs, agent=1, offset=0.2) #rotated_offset[:, 0])
         opponent_speed, opponent_steering = self.opponent_controller.control(obs=self.prev_raw_obs, agent=2)
         main_agent_steer_speed = np.array([[main_steering, main_speed]])
         opponent_steer_speed = np.array([[opponent_steering, opponent_speed]])
@@ -91,6 +92,8 @@ class F110Env_Continuous_Planner(gym.Env):
         '''
         at time t
         '''
+        self.main_renderer.load_target_point(self.currPos, self.prev_obs, rotated_offset)
+        self.f110.add_render_callback(self.main_renderer.render_point)
         raw_obs, time, done, info = self.f110.step(steer_speed)
         ''' 
         at time t+1
@@ -130,12 +133,12 @@ class F110Env_Continuous_Planner(gym.Env):
         # positive_distance = scans[0]
         # print("distance: ", negative_distance, positive_distance)
         # print("sum: ", negative_distance + positive_distance)
-        currPos = np.array([raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
+        self.currPos = np.array([raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
         # xmax, xmin = self.main_waypoints.max(axis=0), self.main_waypoints.min(axis=0)
         # ymax, ymin = self.main_waypoints.max(axis=1), self.main_waypoints.min(axis=1)
         # thetamax, thetamin = 2*np.pi, 0
 
-        obs[:3] = currPos.reshape(-1, 1)
+        obs[:3] = self.currPos.reshape(-1, 1)
         obs[3:NUM_LIDAR_SCANS+3, :] = scans
         targetPoint, idx  = self.main_controller.get_target_waypoint(self.prev_raw_obs, agent=1)
         print("target point:", targetPoint)

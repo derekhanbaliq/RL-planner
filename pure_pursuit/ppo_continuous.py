@@ -85,7 +85,6 @@ def make_env(env_id, idx, capture_video, run_name, gamma):
         if capture_video:
             env.f110.add_render_callback(env.opponent_renderer.render_waypoints)
             env.f110.add_render_callback(env.main_renderer.render_waypoints)
-        env.f110.add_render_callback(env.main_renderer.render_point)
         
         env = gym.wrappers.FlattenObservation(env)  # deal with dm_control's Dict observation space
         env = gym.wrappers.RecordEpisodeStatistics(env)

@@ -25,12 +25,16 @@ class PurePursuit:
     def __init__(self, waypoints):
         self.is_clockwise = False
 
-        self.waypoints = np.array([waypoints.x, waypoints.y]).T
+        self._waypoints = np.array([waypoints.x, waypoints.y]).T
         self.numWaypoints = self.waypoints.shape[0]
         self.ref_speed = waypoints.v
 
         self.L = 1.5
         self.steering_gain = 0.5
+
+    @property
+    def waypoints(self):
+        return self._waypoints
     
     def get_target_waypoint(self, obs, agent):
         # Get current pose
@@ -44,8 +48,8 @@ class PurePursuit:
 
         # Find target point
         targetPoint, target_point_index = self.get_closest_point_beyond_lookahead_dist(self.L)
-        # print(f"agent num: {agent} at {target_point_index}")
-        self.targetPoint = targetPoint
+        print(f"agent num: {agent} at {targetPoint}")
+        #self.targetPoint = targetPoint
         return targetPoint, target_point_index
 
     def control(self, obs, agent, offset=np.zeros((2,))):
@@ -60,6 +64,8 @@ class PurePursuit:
 
         # Find target point
         targetPoint, target_point_index = self.get_closest_point_beyond_lookahead_dist(self.L)
+        print(f"agent {agent} target point {targetPoint} offset {offset}")
+        assert targetPoint.tolist() in self.waypoints.tolist(), f"{targetPoint}"
         targetPoint += offset
         # calculate steering angle / curvature
         waypoint_y = np.dot(np.array([np.sin(-obs['poses_theta'][agent - 1]), np.cos(-obs['poses_theta'][agent - 1])]),

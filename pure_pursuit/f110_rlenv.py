@@ -18,12 +18,8 @@ SCAN_MAX = 10
 class F110Env_Continuous_Planner(gym.Env):
     def __init__(self, T=20, **kargs):
         self.T = T
-<<<<<<< HEAD
         # self.obs_shape = (3 + NUM_LIDAR_SCANS + self.T * 2, 1)
         self.obs_shape = (NUM_LIDAR_SCANS, 1)
-=======
-        self.obs_shape = (3 + NUM_LIDAR_SCANS + self.T * 3, 1)
->>>>>>> wip - fix trajectory, added larger T
         
         map_name = 'levine'  # Spielberg, example, MoscowRaceway, Catalunya -- need further tuning
         try:

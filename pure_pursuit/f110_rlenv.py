@@ -10,7 +10,9 @@ from scipy.spatial import distance
 from f110_gym.envs.f110_env import F110Env
 from pure_pursuit import PurePursuit, Waypoint
 from render import Renderer
+from utils import *
 NUM_LIDAR_SCANS = 1080
+SCAN_MAX = 30
 
 class F110Env_Continuous_Planner(gym.Env):
     def __init__(self, T=1, **kargs):
@@ -46,7 +48,7 @@ class F110Env_Continuous_Planner(gym.Env):
         self.action_size = self.action_space.shape[0]
         # lidar_obs_shape = (NUM_LIDAR_SCANS, 1)
         low = np.concatenate((-100*np.ones((2, 1)), np.zeros((1, 1)), np.zeros((NUM_LIDAR_SCANS, 1)), np.array([-1, -1]* self.T).reshape(-1, 1))) # (lidar_scans, pointX, pointY,)
-        high = np.concatenate((100*np.ones((2, 1)), 2*np.pi * np.ones((1, 1)),  1000 * np.ones((NUM_LIDAR_SCANS, 1)), np.array([1, 1]* self.T).reshape(-1, 1))) # (lidar_scans, pointX, pointY,)
+        high = np.concatenate((100*np.ones((2, 1)), 2*np.pi * np.ones((1, 1)),  30 * np.ones((NUM_LIDAR_SCANS, 1)), np.array([1, 1]* self.T).reshape(-1, 1))) # (lidar_scans, pointX, pointY,)
         
         self.observation_space = spaces.Box(low, high, shape=self.obs_shape)
         self.reward_range = (-10, 10)
@@ -132,7 +134,7 @@ class F110Env_Continuous_Planner(gym.Env):
         reward = -1 # control cost
         if self.f110.collisions[0] == 1:
             # print("collided: ", done, info)
-            reward -= 1
+            reward -= 100
         else:
             reward += 1
         self.dist += np.linalg.norm(self.currPos[:2] - self.prevPos[:2])
@@ -174,6 +176,9 @@ class F110Env_Continuous_Planner(gym.Env):
         # thetamax, thetamin = 2*np.pi, 0
 
         obs[:3] = self.currPos.reshape(-1, 1)
+        scans = downsample(raw_obs['scans'][0], NUM_LIDAR_SCANS, 'simple')
+        scans = np.clip(scans, 0, SCAN_MAX)
+        scans = scans.reshape(-1, 1)
         obs[3:NUM_LIDAR_SCANS+3, :] = scans
         targetPoint, idx  = self.main_controller.get_target_waypoint(self.prev_raw_obs, agent=1)
         # print("target point:", targetPoint)

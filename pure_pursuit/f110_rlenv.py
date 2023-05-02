@@ -32,9 +32,9 @@ class F110Env_Continuous_Planner(gym.Env):
         csv_data = np.loadtxt(map_path + '/' + map_name + '_centerline.csv', delimiter=';', skiprows=0)
 
         self.main_waypoints = Waypoint(csv_data)   # process these with RL
-        self.main_waypoints.v = np.ones(len(self.main_waypoints.v))
+        self.main_waypoints.v = np.ones(len(self.main_waypoints.v)) * 2.0  # speed = 2m/s constant
         self.opponent_waypoints = Waypoint(csv_data)
-        self.opponent_waypoints.v = self.main_waypoints.v / 2.0  # half of the ref speed
+        self.opponent_waypoints.v = self.main_waypoints.v / 4.0  # 0.5m/s
         self.rotated_offset = [0.0, 0.0]
 
         # load controller
@@ -62,6 +62,7 @@ class F110Env_Continuous_Planner(gym.Env):
     def reset(self, **kwargs):
         if "seed" in kwargs:
             self.seed(kwargs["seed"])
+
         main_agent_init_pos = np.array([self.yaml_config['init_pos']])
         
         obs_offset = np.array([0.2, 0, 0])
@@ -71,6 +72,9 @@ class F110Env_Continuous_Planner(gym.Env):
         # obstacle_1_pos = main_agent_init_pos + np.array([0.2, 1, 0]) # np.array([-2.4921703, -5.3199103, 4.1368272])
         # obstacle_2_pos = np.array([-20.84029965293181,0.46567655312,-1.55179939197938]) - np.array([0.2, 0, 0])
         # obstacle_3_pos = np.array([-1.40574936548874,-0.061268582499999,0.027619392342517]) - np.array([-0.2, 0, 0])
+
+
+
         init_pos = np.vstack((main_agent_init_pos, oppo_init_pos))
         self.lap_time = 0
         self.dist = 0

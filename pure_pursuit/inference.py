@@ -68,7 +68,11 @@ class Agent(nn.Module):
         return action, probs.log_prob(action).sum(1), probs.entropy().sum(1), self.critic(x)
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     seed = 1
+=======
+    seed = 44
+>>>>>>> updated scans + reward + horizon T
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -84,7 +88,11 @@ if __name__ == "__main__":
     # envs = make_env()()
     # assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
     
+<<<<<<< HEAD
     model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1682915252/610_model.pt"
+=======
+    model_path = "pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1682996907/610_model.pt"
+>>>>>>> updated scans + reward + horizon T
 
         agent = Agent(envs).to(device)
         model = torch.load(model_path)

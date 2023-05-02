@@ -11,9 +11,14 @@ from f110_gym.envs.f110_env import F110Env
 from pure_pursuit import PurePursuit, Waypoint
 from render import Renderer
 from utils import *
+<<<<<<< HEAD
 
 NUM_LIDAR_SCANS = 720//10
 SCAN_MAX = 10
+=======
+NUM_LIDAR_SCANS = 1080
+SCAN_MAX = 30
+>>>>>>> updated scans + reward + horizon T
 
 class F110Env_Continuous_Planner(gym.Env):
     def __init__(self, T=1, **kargs):

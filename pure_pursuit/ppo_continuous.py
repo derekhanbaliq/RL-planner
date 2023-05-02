@@ -88,7 +88,10 @@ def parse_args():
 def make_env(env_id, idx, capture_video, run_name, gamma):
 
     def thunk():
+<<<<<<< HEAD
         # env = F110Env_Continuous_Planner()
+=======
+>>>>>>> updated scans + reward + horizon T
         env = F110Env_Continuous_Planner(T=args.time_horizon)
         
         if capture_video:
@@ -184,12 +187,11 @@ if __name__ == "__main__":
     )
     # envs = make_env(args.env_id, 0, args.capture_video, run_name, args.gamma)
     assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
-
     agent = Agent(envs).to(device)
     optimizer = optim.Adam(agent.parameters(), lr=args.learning_rate, eps=1e-5)
-    model = torch.load("/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1682915252/610_model.pt")
-    agent.load_state_dict(model["model_state_dict"])
-    optimizer.load_state_dict(model["optimizer_state_dict"])
+    # model = torch.load("/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1682915252/610_model.pt")
+    # agent.load_state_dict(model["model_state_dict"])
+    # optimizer.load_state_dict(model["optimizer_state_dict"])
 
     # ALGO Logic: Storage setup
     obs = torch.zeros((args.num_steps, args.num_envs) + envs.single_observation_space.shape).to(device)

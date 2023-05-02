@@ -68,25 +68,6 @@ class Agent(nn.Module):
         return action, probs.log_prob(action).sum(1), probs.entropy().sum(1), self.critic(x)
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-    for seed in range(10):
-        random.seed(seed)
-        np.random.seed(seed)
-        torch.manual_seed(seed)
-        torch.backends.cudnn.deterministic = True # args.torch_deterministic
-
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-        # env setup
-        envs = gym.vector.SyncVectorEnv(
-            [make_env() for i in range(1)]
-        )
-        # import ipdb; ipdb.set_trace()
-        # envs = make_env()()
-        # assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
-        
-        model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683425737/3_model.pt"
-=======
     seed = 1
     random.seed(seed)
     np.random.seed(seed)
@@ -104,7 +85,6 @@ if __name__ == "__main__":
     # assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
     
     model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1682915252/610_model.pt"
->>>>>>> random static obstacle + distance reward
 
         agent = Agent(envs).to(device)
         model = torch.load(model_path)
@@ -130,9 +110,4 @@ if __name__ == "__main__":
                 next_obs, done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
                 envs.envs[0].render(mode='human')
         envs.close()
-=======
-            # TRY NOT TO MODIFY: execute the game and log data.
-            next_obs, reward, done, infos = envs.step(action.cpu().numpy())
-            next_obs, done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
-            envs.envs[0].render(mode='human_fast')
 >>>>>>> random static obstacle + distance reward

@@ -16,7 +16,7 @@ NUM_LIDAR_SCANS = 720//10
 SCAN_MAX = 10
 
 class F110Env_Continuous_Planner(gym.Env):
-    def __init__(self, T=20, **kargs):
+    def __init__(self, T=1, **kargs):
         self.T = T
         # self.obs_shape = (3 + NUM_LIDAR_SCANS + self.T * 2, 1)
         self.obs_shape = (NUM_LIDAR_SCANS, 1)
@@ -43,7 +43,7 @@ class F110Env_Continuous_Planner(gym.Env):
         self.opponent_controller = PurePursuit(self.opponent_waypoints)
         self.main_renderer = Renderer(self.main_waypoints, self.T)
         self.opponent_renderer = Renderer(self.opponent_waypoints, self.T)
-        self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=1) #4
+        self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=4) #4
         # steer, speed
         
         self.action_space = spaces.Box(low=-1 * np.ones((self.T, )), high=np.ones((self.T, ))) # action ==> x-offset

@@ -109,9 +109,6 @@ class F110Env_Continuous_Planner(gym.Env):
         main_agent_steer_speed = np.array([[main_steering, main_speed]])
         opponent_speed, opponent_steering = self.opponent_controller.control(obs=self.prev_raw_obs, agent=2)
         opponent_steer_speed = np.array([[opponent_steering, opponent_speed]])
-        # obstacle_1_speed = np.array([[0.0, 0.0]])
-        # obstacle_2_speed = np.array([[0.0, 0.0]])
-        # obstacle_3_speed = np.array([[0.0, 0.0]])
 
         steer_speed = np.vstack((main_agent_steer_speed, opponent_steer_speed))
         # print(steer_speed)
@@ -138,7 +135,7 @@ class F110Env_Continuous_Planner(gym.Env):
         self.lap_time += time
         
         # print(reward, info, self.f110.collisions)
-        reward = -1 # control cost
+        reward = -1  # control cost
         if self.f110.collisions[0] == 1:
             # print("collided: ", done, info)
             reward -= 100
@@ -177,7 +174,12 @@ class F110Env_Continuous_Planner(gym.Env):
         # print("sum: ", negative_distance + positive_distance)
         self.prevPos = self.currPos if isinstance(self.currPos, np.ndarray) else np.array([raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
         self.currPos = np.array([raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
+<<<<<<< HEAD
         
+=======
+        self.prevPos = self.currPos if isinstance(self.currPos, np.ndarray) else np.array(
+            [raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
+>>>>>>> Update f110_rlenv.py
         # xmax, xmin = self.main_waypoints.max(axis=0), self.main_waypoints.min(axis=0)
         # ymax, ymin = self.main_waypoints.max(axis=1), self.main_waypoints.min(axis=1)
         # thetamax, thetamin = 2*np.pi, 0

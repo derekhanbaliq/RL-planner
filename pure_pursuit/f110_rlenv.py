@@ -29,11 +29,12 @@ class F110Env_Continuous_Planner(gym.Env):
 
         # load waypoints
         # csv_data = np.loadtxt(map_path + '/' + map_name + '_raceline.csv', delimiter=';', skiprows=0)
-        #csv_data = np.loadtxt(map_path + '/' + map_name + '_centerline.csv', delimiter=',', skiprows=0)
         csv_data = np.loadtxt(map_path + '/' + map_name + '_centerline.csv', delimiter=';', skiprows=0)
 
         self.main_waypoints = Waypoint(csv_data)   # process these with RL
+        self.main_waypoints.v = np.ones(len(self.main_waypoints.v))
         self.opponent_waypoints = Waypoint(csv_data)
+        self.opponent_waypoints.v = self.main_waypoints.v / 2.0  # half of the ref speed
         self.rotated_offset = [0.0, 0.0]
 
         # load controller
@@ -41,7 +42,7 @@ class F110Env_Continuous_Planner(gym.Env):
         self.opponent_controller = PurePursuit(self.opponent_waypoints)
         self.main_renderer = Renderer(self.main_waypoints, self.T)
         self.opponent_renderer = Renderer(self.opponent_waypoints, self.T)
-        self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=4) #4
+        self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=2) #4
         # steer, speed
         
         self.action_space = spaces.Box(low=-1 * np.ones((self.T, )), high=np.ones((self.T, ))) # action ==> x-offset
@@ -62,14 +63,15 @@ class F110Env_Continuous_Planner(gym.Env):
         if "seed" in kwargs:
             self.seed(kwargs["seed"])
         main_agent_init_pos = np.array([self.yaml_config['init_pos']])
+        
         obs_offset = np.array([0.2, 0, 0])
-        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
-        obstacle_1_pos = np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]) + obs_offset # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
-        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
-        obstacle_2_pos = np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]) + obs_offset
-        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
-        obstacle_3_pos = np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]) + obs_offset
-        init_pos = np.vstack((main_agent_init_pos, obstacle_1_pos, obstacle_2_pos, obstacle_3_pos))
+        rand_oppo_idx = np.random.randint(self.main_waypoints.x.shape[0])
+        oppo_init_pos = np.array([self.main_waypoints.x[rand_oppo_idx], self.main_waypoints.y[rand_oppo_idx], self.main_waypoints.θ[rand_oppo_idx]]) + obs_offset # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
+        # oppo_init_pos = main_agent_init_pos + np.array([0, 1, 0])
+        # obstacle_1_pos = main_agent_init_pos + np.array([0.2, 1, 0]) # np.array([-2.4921703, -5.3199103, 4.1368272])
+        # obstacle_2_pos = np.array([-20.84029965293181,0.46567655312,-1.55179939197938]) - np.array([0.2, 0, 0])
+        # obstacle_3_pos = np.array([-1.40574936548874,-0.061268582499999,0.027619392342517]) - np.array([-0.2, 0, 0])
+        init_pos = np.vstack((main_agent_init_pos, oppo_init_pos))
         self.lap_time = 0
         self.dist = 0
         raw_obs, _, done, _ = self.f110.reset(init_pos)
@@ -100,13 +102,14 @@ class F110Env_Continuous_Planner(gym.Env):
 
 
         main_speed, main_steering = self.main_controller.control(obs=self.prev_raw_obs, agent=1, offset=rotated_offset[:, 0])
-        # opponent_speed, opponent_steering = self.opponent_controller.control(obs=self.prev_raw_obs, agent=2)
         main_agent_steer_speed = np.array([[main_steering, main_speed]])
-        obstacle_1_speed = np.array([[0.0, 0.0]])
-        obstacle_2_speed = np.array([[0.0, 0.0]])
-        obstacle_3_speed = np.array([[0.0, 0.0]])
+        opponent_speed, opponent_steering = self.opponent_controller.control(obs=self.prev_raw_obs, agent=2)
+        opponent_steer_speed = np.array([[opponent_steering, opponent_speed]])
+        # obstacle_1_speed = np.array([[0.0, 0.0]])
+        # obstacle_2_speed = np.array([[0.0, 0.0]])
+        # obstacle_3_speed = np.array([[0.0, 0.0]])
 
-        steer_speed = np.vstack((main_agent_steer_speed, obstacle_1_speed, obstacle_2_speed, obstacle_3_speed))
+        steer_speed = np.vstack((main_agent_steer_speed, opponent_steer_speed))
         # print(steer_speed)
 
         '''

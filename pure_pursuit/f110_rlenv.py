@@ -34,7 +34,7 @@ class F110Env_Continuous_Planner(gym.Env):
         self.main_waypoints = Waypoint(csv_data)   # process these with RL
         self.main_waypoints.v = np.ones(len(self.main_waypoints.v)) * 2.0  # speed = 2m/s constant
         self.opponent_waypoints = Waypoint(csv_data)
-        self.opponent_waypoints.v = self.main_waypoints.v / 4.0  # 0.5m/s
+        self.opponent_waypoints.v = self.main_waypoints.v / 2.0  # 1.0m/s
         self.rotated_offset = [0.0, 0.0]
 
         # load controller
@@ -56,7 +56,7 @@ class F110Env_Continuous_Planner(gym.Env):
         self.metadata = {}
         self.currPos = None
         self.lap_time = 0
-        self.action_diff_penalty = 2
+        self.action_diff_penalty = 0.1
         self.dist = 0
 
     def reset(self, **kwargs):
@@ -142,11 +142,12 @@ class F110Env_Continuous_Planner(gym.Env):
         else:
             reward += 1
         self.dist += np.linalg.norm(self.currPos[:2] - self.prevPos[:2])
-        reward += (self.dist/self.lap_time)/1000
+        vel_reward = (self.dist/self.lap_time)/1000
+        reward += vel_reward
         if self.T > 1:
             action_diff = np.abs(action[:-1] - action[1:])
             reward -= self.action_diff_penalty * np.sum(action_diff)
-        # print(reward)
+        import ipdb; ipdb.set_trace()
         self.prev_raw_obs = raw_obs
         obs = self._get_obs(raw_obs)
         self.prev_obs = obs
@@ -174,12 +175,8 @@ class F110Env_Continuous_Planner(gym.Env):
         # print("sum: ", negative_distance + positive_distance)
         self.prevPos = self.currPos if isinstance(self.currPos, np.ndarray) else np.array([raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
         self.currPos = np.array([raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
-<<<<<<< HEAD
-        
-=======
         self.prevPos = self.currPos if isinstance(self.currPos, np.ndarray) else np.array(
             [raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
->>>>>>> Update f110_rlenv.py
         # xmax, xmin = self.main_waypoints.max(axis=0), self.main_waypoints.min(axis=0)
         # ymax, ymin = self.main_waypoints.max(axis=1), self.main_waypoints.min(axis=1)
         # thetamax, thetamin = 2*np.pi, 0
@@ -197,7 +194,7 @@ class F110Env_Continuous_Planner(gym.Env):
             if i == 0:
                 obs[start_idx:end_idx, :] = targetPoint.reshape(-1, 1)
             else:
-                wp = self.main_controller.waypoints[idx + i]
+                wp = self.main_controller.waypoints[(idx + i) % self.main_controller.waypoints.shape[0]]
                 obs[start_idx:end_idx, :] = wp.reshape(-1, 1)
 
         # obs[-2:, :] = targetPoint.reshape(-1, 1)

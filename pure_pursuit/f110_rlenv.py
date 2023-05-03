@@ -145,7 +145,7 @@ class F110Env_Continuous_Planner(gym.Env):
         if self.T > 1:
             action_diff = np.abs(action[:-1] - action[1:])
             reward -= self.action_diff_penalty * np.sum(action_diff)
-        import ipdb; ipdb.set_trace()
+        # import ipdb; ipdb.set_trace()
         self.prev_raw_obs = raw_obs
         obs = self._get_obs(raw_obs)
         self.prev_obs = obs

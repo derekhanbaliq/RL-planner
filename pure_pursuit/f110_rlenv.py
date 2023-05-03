@@ -6,19 +6,15 @@ import os
 import yaml
 import numpy as np
 from scipy.spatial import distance
+import random
 
 from f110_gym.envs.f110_env import F110Env
 from pure_pursuit import PurePursuit, Waypoint
 from render import Renderer
 from utils import *
-<<<<<<< HEAD
-
-NUM_LIDAR_SCANS = 720//10
-SCAN_MAX = 10
-=======
 NUM_LIDAR_SCANS = 1080
 SCAN_MAX = 30
->>>>>>> updated scans + reward + horizon T
+NUM_OBSTACLES = 7
 
 class F110Env_Continuous_Planner(gym.Env):
     def __init__(self, T=1, **kargs):
@@ -35,8 +31,6 @@ class F110Env_Continuous_Planner(gym.Env):
         self.yaml_config = yaml.load(open(map_path + '/' + map_name + '_map.yaml'), Loader=yaml.FullLoader)
 
         # load waypoints
-        # csv_data = np.loadtxt(map_path + '/' + map_name + '_raceline.csv', delimiter=';', skiprows=0)
-        #csv_data = np.loadtxt(map_path + '/' + map_name + '_centerline.csv', delimiter=',', skiprows=0)
         csv_data = np.loadtxt(map_path + '/' + map_name + '_centerline.csv', delimiter=';', skiprows=0)
 
         self.main_waypoints = Waypoint(csv_data)   # process these with RL
@@ -48,7 +42,7 @@ class F110Env_Continuous_Planner(gym.Env):
         self.opponent_controller = PurePursuit(self.opponent_waypoints)
         self.main_renderer = Renderer(self.main_waypoints, self.T)
         self.opponent_renderer = Renderer(self.opponent_waypoints, self.T)
-        self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=4) #4
+        self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=8) #4
         # steer, speed
         
         self.action_space = spaces.Box(low=-1 * np.ones((self.T, )), high=np.ones((self.T, ))) # action ==> x-offset
@@ -68,18 +62,30 @@ class F110Env_Continuous_Planner(gym.Env):
         self.action_diff_penalty = 0.2
         self.dist = 0
 
+    def _create_obstacle(self):
+        operator_functions = {
+            '+': lambda a, b: a + b, 
+            '-': lambda a, b: a - b,
+        }
+        operators = ["+","-"]
+        obs_offset = np.array([0.2, 0.2, 0])
+        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
+
+        operator = random.choice(operators)
+        obstacle_pos = operator_functions[operator](np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]), np.random.random() * obs_offset) # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
+        return obstacle_pos
+
+
+
     def reset(self, **kwargs):
+
         if "seed" in kwargs:
             self.seed(kwargs["seed"])
         main_agent_init_pos = np.array([self.yaml_config['init_pos']])
-        obs_offset = np.array([0.2, 0, 0])
-        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
-        obstacle_1_pos = np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]) + obs_offset # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
-        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
-        obstacle_2_pos = np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]) + obs_offset
-        rand_obstacle_idx = np.random.randint(self.main_waypoints.x.shape[0])
-        obstacle_3_pos = np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]) + obs_offset
-        init_pos = np.vstack((main_agent_init_pos, obstacle_1_pos, obstacle_2_pos, obstacle_3_pos))
+        poses = [main_agent_init_pos]
+        for _ in range(NUM_OBSTACLES):
+            poses.append(self._create_obstacle())
+        init_pos = np.vstack(tuple(poses))
         self.lap_time = 0
         self.dist = 0
         raw_obs, _, done, _ = self.f110.reset(init_pos)
@@ -95,8 +101,6 @@ class F110Env_Continuous_Planner(gym.Env):
         """
         action: nd.array => x-offset + original traj of length (self.T, 1)
         """
-        # TODO: spline points of horizon T
-        # print("action: ", action)
         if self.T > 1:
             control_action = action[0]
         elif self.T == 1:
@@ -105,7 +109,6 @@ class F110Env_Continuous_Planner(gym.Env):
             raise IndexError("T <= 0")
         R = lambda theta: np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]])
         axis = np.array([0, 1]).reshape(-1, 1)
-        # translation from
         rotated_offset = R(self.prev_raw_obs['poses_theta'][0]) @ axis * control_action
         # print(f"action: {action}, rotated_offset: {rotated_offset}")
 
@@ -113,12 +116,11 @@ class F110Env_Continuous_Planner(gym.Env):
         # opponent_speed, opponent_steering = self.opponent_controller.control(obs=self.prev_raw_obs, agent=2)
         # print(f"main speed {main_speed}")
         main_agent_steer_speed = np.array([[main_steering, main_speed]])
-        obstacle_1_speed = np.array([[0.0, 0.0]])
-        obstacle_2_speed = np.array([[0.0, 0.0]])
-        obstacle_3_speed = np.array([[0.0, 0.0]])
+        actions = [main_agent_steer_speed]
+        for _ in range(NUM_OBSTACLES):
+            actions.append(np.array([[0.0, 0.0]]))
 
-        steer_speed = np.vstack((main_agent_steer_speed, obstacle_1_speed, obstacle_2_speed, obstacle_3_speed))
-        # print(steer_speed)
+        steer_speed = np.vstack(tuple(actions))
 
         '''
         at time t

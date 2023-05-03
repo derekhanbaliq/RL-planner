@@ -14,7 +14,7 @@ def make_env(gamma=0.99):
 
     def thunk():
         # env = F110Env_Continuous_Planner()
-        env = F110Env_Continuous_Planner(T=1)
+        env = F110Env_Continuous_Planner(T=20)
         
         env.f110.add_render_callback(env.main_renderer.render_waypoints)
         env.f110.add_render_callback(env.opponent_renderer.render_waypoints)
@@ -68,7 +68,7 @@ class Agent(nn.Module):
         return action, probs.log_prob(action).sum(1), probs.entropy().sum(1), self.critic(x)
 
 if __name__ == "__main__":
-    seed = 44
+    seed = 555
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -84,6 +84,7 @@ if __name__ == "__main__":
     # envs = make_env()()
     # assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
     
+<<<<<<< HEAD
     model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1682915252/610_model.pt"
 
         agent = Agent(envs).to(device)
@@ -108,3 +109,29 @@ if __name__ == "__main__":
                 next_obs, done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
                 envs.envs[0].render(mode='human')
         envs.close()
+=======
+    model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683123749/300_model.pt"
+
+    agent = Agent(envs).to(device)
+    model = torch.load(model_path)
+    agent.load_state_dict(model["model_state_dict"])
+
+    # ALGO Logic: Storage setup
+
+    # TRY NOT TO MODIFY: start the game
+    next_obs = envs.reset(seed=seed)
+    next_obs = torch.Tensor(next_obs).to(device)
+    done = False
+
+    while not done:
+
+        # ALGO LOGIC: action logic
+        with torch.no_grad():
+            # action here is the "betterPoint"
+            action, logprob, _, value = agent.get_action_and_value(next_obs)
+
+            # TRY NOT TO MODIFY: execute the game and log data.
+            next_obs, reward, done, infos = envs.step(action.cpu().numpy())
+            next_obs, done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
+            envs.envs[0].render(mode='human_fast')
+>>>>>>> cleaned up code + added more obstacles

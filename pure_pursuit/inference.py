@@ -68,6 +68,7 @@ class Agent(nn.Module):
         return action, probs.log_prob(action).sum(1), probs.entropy().sum(1), self.critic(x)
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     seed = 555
     random.seed(seed)
     np.random.seed(seed)
@@ -111,27 +112,84 @@ if __name__ == "__main__":
         envs.close()
 =======
     model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683123749/300_model.pt"
+=======
+    for seed in range(1, 10):
+        # seed = 44
+        random.seed(seed)
+        np.random.seed(seed)
+        torch.manual_seed(seed)
+        torch.backends.cudnn.deterministic = True # args.torch_deterministic
 
-    agent = Agent(envs).to(device)
-    model = torch.load(model_path)
-    agent.load_state_dict(model["model_state_dict"])
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # ALGO Logic: Storage setup
+        # env setup
+        envs = gym.vector.SyncVectorEnv(
+            [make_env() for i in range(1)]
+        )
+        # import ipdb; ipdb.set_trace()
+        # envs = make_env()()
+        # assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
 
-    # TRY NOT TO MODIFY: start the game
-    next_obs = envs.reset(seed=seed)
-    next_obs = torch.Tensor(next_obs).to(device)
-    done = False
+        
+        
+        
+        model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683256272/549_model.pt"
+        """
+        this is  okay... avoids obstacles, but crashes into them from time to time, kinda slow
+        """
 
-    while not done:
+        # model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683149904/760_model.pt"
+        """
+        wobbly, crashed,
+        fast, worse than without localization
+        """
 
-        # ALGO LOGIC: action logic
-        with torch.no_grad():
-            # action here is the "betterPoint"
-            action, logprob, _, value = agent.get_action_and_value(next_obs)
+        # model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683123749/300_model.pt"
+        """
+        not good....
+        """
 
+        # model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683080557/910_model.pt"
+        """
+        ass....
+        """
+
+        model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683345080/684_model.pt"
+
+
+
+>>>>>>> without localization + target waypoints
+
+        agent = Agent(envs).to(device)
+        model = torch.load(model_path)
+        agent.load_state_dict(model["model_state_dict"])
+
+        # ALGO Logic: Storage setup
+
+        # TRY NOT TO MODIFY: start the game
+        next_obs = envs.reset(seed=seed)
+        next_obs = torch.Tensor(next_obs).to(device)
+        done = False
+
+        while not done:
+
+            # ALGO LOGIC: action logic
+            with torch.no_grad():
+                # action here is the "betterPoint"
+                action, logprob, _, value = agent.get_action_and_value(next_obs)
+
+<<<<<<< HEAD
             # TRY NOT TO MODIFY: execute the game and log data.
             next_obs, reward, done, infos = envs.step(action.cpu().numpy())
             next_obs, done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
             envs.envs[0].render(mode='human_fast')
 >>>>>>> cleaned up code + added more obstacles
+=======
+                # TRY NOT TO MODIFY: execute the game and log data.
+                next_obs, reward, done, infos = envs.step(action.cpu().numpy())
+                next_obs, done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
+                envs.envs[0].render(mode='human_fast')
+        envs.close()
+        del agent
+        del envs
+>>>>>>> without localization + target waypoints

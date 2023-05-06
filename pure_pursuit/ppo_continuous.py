@@ -189,7 +189,8 @@ if __name__ == "__main__":
     assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
     agent = Agent(envs).to(device)
     optimizer = optim.Adam(agent.parameters(), lr=args.learning_rate, eps=1e-5)
-    # model = torch.load("/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1682915252/610_model.pt")
+    # model = torch.load("/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683256272/549_model.pt") # /home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1682915252/610_model.pt"
+
     # agent.load_state_dict(model["model_state_dict"])
     # optimizer.load_state_dict(model["optimizer_state_dict"])
 
@@ -236,7 +237,7 @@ if __name__ == "__main__":
             rewards[step] = torch.tensor(reward).to(device).view(-1)
             next_obs, next_done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
             if args.render:
-                envs.envs[0].render(mode='human')
+                envs.envs[0].render(mode='human_fast')
 
             # Only print when at least 1 env is done
             # if "final_info" not in infos:

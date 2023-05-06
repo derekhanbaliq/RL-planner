@@ -42,7 +42,7 @@ class F110Env_Continuous_Planner(gym.Env):
         self.opponent_controller = PurePursuit(self.opponent_waypoints)
         self.main_renderer = Renderer(self.main_waypoints, self.T)
         self.opponent_renderer = Renderer(self.opponent_waypoints, self.T)
-        self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=8) #4
+        self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=1+NUM_OBSTACLES) #4
         # steer, speed
         
         self.action_space = spaces.Box(low=-1 * np.ones((self.T, )), high=np.ones((self.T, ))) # action ==> x-offset
@@ -74,9 +74,6 @@ class F110Env_Continuous_Planner(gym.Env):
         operator = random.choice(operators)
         obstacle_pos = operator_functions[operator](np.array([self.main_waypoints.x[rand_obstacle_idx], self.main_waypoints.y[rand_obstacle_idx], self.main_waypoints.θ[rand_obstacle_idx]]), np.random.random() * obs_offset) # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
         return obstacle_pos
-
-
-
     def reset(self, **kwargs):
 
         if "seed" in kwargs:

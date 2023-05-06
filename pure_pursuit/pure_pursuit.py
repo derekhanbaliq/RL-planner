@@ -27,7 +27,7 @@ class PurePursuit:
 
         self.waypoints = np.array([waypoints.x, waypoints.y]).T
         self.numWaypoints = self.waypoints.shape[0]
-        self.ref_speed = waypoints.v
+        self.ref_speed = np.ones_like(waypoints.v)
 
         self.L = 1.5
         self.steering_gain = 0.5

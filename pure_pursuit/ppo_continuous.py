@@ -14,6 +14,7 @@ from torch.distributions.normal import Normal
 from torch.utils.tensorboard import SummaryWriter
 
 from f110_rlenv import F110Env_Continuous_Planner
+from tqdm import tqdm
 
 def parse_args():
     # fmt: off
@@ -173,7 +174,7 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() and args.cuda else "cpu")
 
     # env setup
-    envs = gym.vector.SyncVectorEnv(
+    envs = gym.vector.AsyncVectorEnv(
         [make_env(args.env_id, i, args.capture_video, run_name, args.gamma) for i in range(args.num_envs)]
     )
     # envs = make_env(args.env_id, 0, args.capture_video, run_name, args.gamma)
@@ -199,7 +200,7 @@ if __name__ == "__main__":
     num_updates = args.total_timesteps // args.batch_size
     video_filenames = set()
 
-    for update in range(1, num_updates + 1):
+    for update in tqdm(range(1, num_updates + 1)):
         # Annealing the rate if instructed to do so.
         if args.anneal_lr:
             frac = 1.0 - (update - 1.0) / num_updates
@@ -312,6 +313,7 @@ if __name__ == "__main__":
                 optimizer.zero_grad()
                 loss.backward()
                 nn.utils.clip_grad_norm_(agent.parameters(), args.max_grad_norm)
+                # print("Capturing:", torch.cuda.is_current_stream_capturing())
                 optimizer.step()
 
             if args.target_kl is not None:

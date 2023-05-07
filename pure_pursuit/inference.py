@@ -83,9 +83,9 @@ if __name__ == "__main__":
         # import ipdb; ipdb.set_trace()
         # envs = make_env()()
         # assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
-        
-        # model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683425737/3_model.pt"
-        model_path = f"D:/Penn/ESE 615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683468663/6_model.pt"
+
+        model_path = f"D:/Penn/ESE 615/RL-planner/pure_pursuit/runs/no_noise/global_step=667268_reward=586.1904296875_model.pt"
+        model_path = f"D:/Penn/ESE 615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683489918/global_step=775292_reward=564.6980590820312_model.pt"
 
         agent = Agent(envs).to(device)
         model = torch.load(model_path)
@@ -97,6 +97,7 @@ if __name__ == "__main__":
         next_obs = envs.reset(seed=seed)
         next_obs = torch.Tensor(next_obs).to(device)
         done = False
+        r = 0
 
         while not done:
 
@@ -109,4 +110,7 @@ if __name__ == "__main__":
                 next_obs, reward, done, infos = envs.step(action.cpu().numpy())
                 next_obs, done = torch.Tensor(next_obs).to(device), torch.Tensor(done).to(device)
                 envs.envs[0].render(mode='human')
+                r += reward
+        print(f"reward {r}")
+        r = 0
         envs.close()

@@ -199,6 +199,7 @@ if __name__ == "__main__":
     next_done = torch.zeros(args.num_envs).to(device)
     num_updates = args.total_timesteps // args.batch_size
     video_filenames = set()
+    high_reward = float('-inf')
 
     for update in tqdm(range(1, num_updates + 1)):
         # Annealing the rate if instructed to do so.
@@ -236,6 +237,15 @@ if __name__ == "__main__":
             for i, info in enumerate(infos):
                 # print(next_done[i], info["checkpoint_done"])
                 if next_done[i] or info["checkpoint_done"].all():
+                    rew = info['episode']['r']
+                    if rew > high_reward:
+                        high_reward = rew
+                        torch.save({
+                            'global_step': global_step,
+                            'model_state_dict': agent.state_dict(),
+                            'optimizer_state_dict': optimizer.state_dict(),
+                            'reward': rew
+                        }, f"runs/{run_name}/global_step={global_step}_reward={rew}_model.pt")
                     print(f"global_step={global_step}, episodic_return={info['episode']['r']}")
                     writer.add_scalar("charts/episodic_return", info["episode"]["r"], global_step)
                     writer.add_scalar("charts/episodic_length", info["episode"]["l"], global_step)
@@ -322,13 +332,13 @@ if __name__ == "__main__":
         y_pred, y_true = b_values.cpu().numpy(), b_returns.cpu().numpy()
         var_y = np.var(y_true)
         explained_var = np.nan if var_y == 0 else 1 - np.var(y_true - y_pred) / var_y
-        if update % (num_updates//10) == 0:
-            torch.save({
-                'num_updates': num_updates,
-                'model_state_dict': agent.state_dict(),
-                'optimizer_state_dict': optimizer.state_dict(),
-                'loss': loss,
-                }, f"runs/{run_name}/{update}_model.pt")
+        # if update % (num_updates//10) == 0:
+        #     torch.save({
+        #         'num_updates': num_updates,
+        #         'model_state_dict': agent.state_dict(),
+        #         'optimizer_state_dict': optimizer.state_dict(),
+        #         'loss': loss,
+        #         }, f"runs/{run_name}/{update}_model.pt")
 
         # TRY NOT TO MODIFY: record rewards for plotting purposes
         writer.add_scalar("charts/learning_rate", optimizer.param_groups[0]["lr"], global_step)

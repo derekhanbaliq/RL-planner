@@ -68,6 +68,9 @@ class F110Env_Continuous_Planner(gym.Env):
         obs_offset = np.array([0.2, 0, 0])
         rand_oppo_idx = np.random.randint(self.main_waypoints.x.shape[0])
         oppo_init_pos = np.array([self.main_waypoints.x[rand_oppo_idx], self.main_waypoints.y[rand_oppo_idx], self.main_waypoints.θ[rand_oppo_idx]]) + obs_offset # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
+
+        # dynamic obstacle avoidance with random oppo and agent initialization with old reward
+
         # oppo_init_pos = main_agent_init_pos + np.array([0, 1, 0])
         # obstacle_1_pos = main_agent_init_pos + np.array([0.2, 1, 0]) # np.array([-2.4921703, -5.3199103, 4.1368272])
         # obstacle_2_pos = np.array([-20.84029965293181,0.46567655312,-1.55179939197938]) - np.array([0.2, 0, 0])
@@ -101,7 +104,6 @@ class F110Env_Continuous_Planner(gym.Env):
         axis = np.array([0, 1]).reshape(-1, 1)
         # translation from
         rotated_offset = R(self.prev_raw_obs['poses_theta'][0]) @ axis * control_action
-
 
         main_speed, main_steering = self.main_controller.control(obs=self.prev_raw_obs, agent=1, offset=rotated_offset[:, 0])
         main_agent_steer_speed = np.array([[main_steering, main_speed]])

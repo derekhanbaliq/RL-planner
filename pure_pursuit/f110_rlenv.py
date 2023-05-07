@@ -67,8 +67,8 @@ class F110Env_Continuous_Planner(gym.Env):
             self.seed(kwargs["seed"])
         main_agent_init_pos = np.array([self.yaml_config['init_pos']])
         obstacle_1_pos = main_agent_init_pos + np.array([0.2, 2, 0]) # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
-        obstacle_2_pos = np.array([-20.84029965293181,0.46567655312,-1.55179939197938]) - np.array([0.2, 0, 0])
-        obstacle_3_pos = np.array([-1.40574936548874,-0.061268582499999,0.027619392342517]) - np.array([-0.2, 0, 0])
+        obstacle_2_pos = np.array([-20.84029965293181,0.46567655312,-1.55179939197938]) + np.array([0.2, 0, 0])
+        obstacle_3_pos = np.array([-1.40574936548874,-0.061268582499999,0.027619392342517]) + np.array([0.2, 0, 0])
         init_pos = np.vstack((main_agent_init_pos, obstacle_1_pos, obstacle_2_pos, obstacle_3_pos))
         self.lap_time = 0
         self.dist = 0
@@ -155,7 +155,7 @@ class F110Env_Continuous_Planner(gym.Env):
         # reward 
         min_scan = np.min(obs)
         # print(min_scan)
-        reward += np.clip(min_scan, 0.1, 1.0)/100
+        reward += np.clip(min_scan, 0.1, 1.0)/50
         return reward
 
     def _get_obs(self, raw_obs):
@@ -171,7 +171,9 @@ class F110Env_Continuous_Planner(gym.Env):
         scans = scans[180:900]
         # scans = downsample(scans, NUM_LIDAR_SCANS, 'simple')
         scans = scans[::10]
-        scans = np.clip(scans, 0, SCAN_MAX)
+        # scans = np.clip(scans, 0, SCAN_MAX)
+        sim2real_noise = np.random.uniform(-0.25, 0.25, scans.shape)
+        scans = scans + sim2real_noise
         # print(scans.shape)
         # negative_distance, positive_distance = 0, 0
         # angle_increment = 360/NUM_LIDAR_SCANS

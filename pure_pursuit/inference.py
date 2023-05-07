@@ -14,7 +14,7 @@ def make_env(gamma=0.99):
 
     def thunk():
         # env = F110Env_Continuous_Planner()
-        env = F110Env_Continuous_Planner(T=1)
+        env = F110Env_Continuous_Planner(T=15)
         
         env.f110.add_render_callback(env.main_renderer.render_waypoints)
         env.f110.add_render_callback(env.opponent_renderer.render_waypoints)
@@ -83,8 +83,9 @@ if __name__ == "__main__":
         # import ipdb; ipdb.set_trace()
         # envs = make_env()()
         # assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
-        
-        model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683409506/30_model.pt"
+
+        # model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683409506/30_model.pt"
+        model_path = r"D:\Penn\ESE 615\RL-planner\pure_pursuit\runs\F1Tenth-Planner__ppo_continuous__1__1683433768\33_model.pt"
 
         agent = Agent(envs).to(device)
         model = torch.load(model_path)

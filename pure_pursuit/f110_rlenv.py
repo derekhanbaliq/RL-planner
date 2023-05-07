@@ -12,7 +12,7 @@ from f110_gym.envs.f110_env import F110Env
 from pure_pursuit import PurePursuit, Waypoint
 from render import Renderer
 from utils import *
-NUM_LIDAR_SCANS = 1080
+NUM_LIDAR_SCANS = 720//10
 SCAN_MAX = 30
 NUM_OBSTACLES = 7
 

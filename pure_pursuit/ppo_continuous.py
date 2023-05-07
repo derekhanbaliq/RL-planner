@@ -14,12 +14,8 @@ from torch.distributions.normal import Normal
 from torch.utils.tensorboard import SummaryWriter
 
 from f110_rlenv import F110Env_Continuous_Planner
-<<<<<<< HEAD
 from tqdm import tqdm
 
-=======
-from tqdm import tqdm 
->>>>>>> random static obstacle + distance reward
 def parse_args():
     # fmt: off
     parser = argparse.ArgumentParser()
@@ -88,10 +84,6 @@ def parse_args():
 def make_env(env_id, idx, capture_video, run_name, gamma):
 
     def thunk():
-<<<<<<< HEAD
-        # env = F110Env_Continuous_Planner()
-=======
->>>>>>> updated scans + reward + horizon T
         env = F110Env_Continuous_Planner(T=args.time_horizon)
         
         if capture_video:

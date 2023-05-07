@@ -1,10 +1,11 @@
 import os
 
+
 def downsample(data, observation_shape, downsampling_method):
     if downsampling_method == "simple":
         # print("observation_shape type: ", type(observation_shape))
         # print("observation_shape: ", observation_shape)
-        obs_gap = int(1080/observation_shape)
+        obs_gap = int(1080 / observation_shape)
         processed_data = data[::obs_gap]
     else:
         processed_data = data
@@ -30,4 +31,3 @@ def render_callback(env_renderer):
 def path_filler(path):
     abs_path = os.path.abspath(os.path.join('.', path))
     return abs_path
-

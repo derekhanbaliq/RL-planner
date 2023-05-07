@@ -56,7 +56,7 @@ class F110Env_Continuous_Planner(gym.Env):
         self.metadata = {}
         self.currPos = None
         self.lap_time = 0
-        self.action_diff_penalty = 0.1
+        self.action_diff_penalty = 0.2
         self.dist = 0
 
     def reset(self, **kwargs):
@@ -140,32 +140,22 @@ class F110Env_Continuous_Planner(gym.Env):
         else:
             reward += 1
         self.dist += np.linalg.norm(self.currPos[:2] - self.prevPos[:2])
-        vel_reward = (self.dist/self.lap_time)/1000
+        # print("self.currPos[:2] =", self.currPos[:2])
+        # print("self.prevPos[:2] =", self.prevPos[:2])
+        # print("self.dist =", self.dist)
+        vel_reward = (self.dist/self.lap_time) / 10.0
+        print("vel_reward =", vel_reward)
         reward += vel_reward
         if self.T > 1:
             action_diff = np.abs(action[:-1] - action[1:])
-            reward -= self.action_diff_penalty * np.sum(action_diff)
+            reward -= self.action_diff_penalty * np.sum(action_diff) / self.T
+            print("wtf", self.action_diff_penalty * np.sum(action_diff) / self.T)
+
         # import ipdb; ipdb.set_trace()
         self.prev_raw_obs = raw_obs
         obs = self._get_obs(raw_obs)
         self.prev_obs = obs
 
-        # print(reward, info, self.f110.collisions)
-        reward = -1  # control cost
-        if self.f110.collisions[0] == 1:
-            # print("collided: ", done, info)
-            reward -= 1
-        else:
-            reward += 1
-        self.dist += np.linalg.norm(self.currPos[:2] - self.prevPos[:2])
-        reward += (self.dist / self.lap_time) / 1000
-        if self.T > 1:
-            action_diff = np.abs(action[:-1] - action[1:])
-            reward -= self.action_diff_penalty * np.sum(action_diff)
-        # print(reward)
-        self.prev_raw_obs = raw_obs
-        obs = self._get_obs(raw_obs)
-        self.prev_obs = obs
         # TODO
         # reward = self.get_reward()
 
@@ -190,8 +180,8 @@ class F110Env_Continuous_Planner(gym.Env):
         # print("sum: ", negative_distance + positive_distance)
         self.prevPos = self.currPos if isinstance(self.currPos, np.ndarray) else np.array([raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
         self.currPos = np.array([raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
-        self.prevPos = self.currPos if isinstance(self.currPos, np.ndarray) else np.array(
-            [raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
+        # self.prevPos = self.currPos if isinstance(self.currPos, np.ndarray) else np.array(
+        #     [raw_obs['poses_x'][0], raw_obs['poses_y'][0], raw_obs['poses_theta'][0]])
         # xmax, xmin = self.main_waypoints.max(axis=0), self.main_waypoints.min(axis=0)
         # ymax, ymin = self.main_waypoints.max(axis=1), self.main_waypoints.min(axis=1)
         # thetamax, thetamin = 2*np.pi, 0

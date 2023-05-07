@@ -88,7 +88,6 @@ class Renderer:
     def load_target_point(self, target_points, offsets):
         self.target_points = target_points[:, :2] + offsets
 
-
     def load_obs(self, obs):
         self.obs = obs
 

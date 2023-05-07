@@ -178,6 +178,7 @@ if __name__ == "__main__":
     )
     # envs = make_env(args.env_id, 0, args.capture_video, run_name, args.gamma)
     assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
+
     agent = Agent(envs).to(device)
     optimizer = optim.Adam(agent.parameters(), lr=args.learning_rate, eps=1e-5)
     # model = torch.load("/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1682915252/610_model.pt")

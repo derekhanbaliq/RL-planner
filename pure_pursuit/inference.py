@@ -10,15 +10,15 @@ from torch.distributions.normal import Normal
 
 from f110_rlenv import F110Env_Continuous_Planner
 
-def make_env(gamma=0.99):
 
+def make_env(gamma=0.99):
     def thunk():
         # env = F110Env_Continuous_Planner()
-        env = F110Env_Continuous_Planner(T=1)
-        
+        env = F110Env_Continuous_Planner(T=20)
+
         env.f110.add_render_callback(env.main_renderer.render_waypoints)
         env.f110.add_render_callback(env.opponent_renderer.render_waypoints)
-        
+
         env = gym.wrappers.FlattenObservation(env)  # deal with dm_control's Dict observation space
         env = gym.wrappers.RecordEpisodeStatistics(env)
         env = gym.wrappers.ClipAction(env)
@@ -29,7 +29,8 @@ def make_env(gamma=0.99):
         return env
 
     return thunk
-    
+
+
 def layer_init(layer, std=np.sqrt(2), bias_const=0.0):
     torch.nn.init.orthogonal_(layer.weight, std)
     torch.nn.init.constant_(layer.bias, bias_const)
@@ -67,12 +68,13 @@ class Agent(nn.Module):
             action = probs.sample()
         return action, probs.log_prob(action).sum(1), probs.entropy().sum(1), self.critic(x)
 
+
 if __name__ == "__main__":
-    seed = 44
+    seed = 4
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    torch.backends.cudnn.deterministic = True # args.torch_deterministic
+    torch.backends.cudnn.deterministic = True  # args.torch_deterministic
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -83,9 +85,10 @@ if __name__ == "__main__":
     # import ipdb; ipdb.set_trace()
     # envs = make_env()()
     # assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
-    
-    # model_path = "pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1682996907/610_model.pt"
+
+    # model_path = "runs/F1Tenth-Planner__ppo_continuous__1__1682996907/610_model.pt"
     model_path = "runs/F1Tenth-Planner__ppo_continuous__1__1683079510/340_model.pt"
+    # model_path = "runs/F1Tenth-Planner__ppo_continuous__1__1683075711/12_model.pt"
 
     agent = Agent(envs).to(device)
     model = torch.load(model_path)
@@ -99,7 +102,6 @@ if __name__ == "__main__":
     done = False
 
     while not done:
-
         # ALGO LOGIC: action logic
         with torch.no_grad():
             # action here is the "betterPoint"

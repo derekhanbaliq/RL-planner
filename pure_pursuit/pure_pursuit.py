@@ -32,7 +32,6 @@ class PurePursuit:
         self.L = 1.5
         self.steering_gain = 0.5
 
-    
     def get_target_waypoint(self, obs, agent):
         # Get current pose
         self.currX = obs['poses_x'][agent - 1]
@@ -46,7 +45,7 @@ class PurePursuit:
         # Find target point
         targetPoint, target_point_index = self.get_closest_point_beyond_lookahead_dist(self.L)
         # print(f"agent num: {agent} at {targetPoint}")
-        #self.targetPoint = targetPoint
+        # self.targetPoint = targetPoint
         return targetPoint, target_point_index
 
     def control(self, obs, agent, offset=None):
@@ -96,5 +95,5 @@ class PurePursuit:
                 dist = self.distances[point_index]
 
         point = self.waypoints[point_index]
-        
+
         return point, point_index

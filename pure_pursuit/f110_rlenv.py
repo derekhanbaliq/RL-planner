@@ -20,7 +20,7 @@ class F110Env_Continuous_Planner(gym.Env):
         self.T = T
         # self.obs_shape = (3 + NUM_LIDAR_SCANS + self.T * 2, 1)
         self.obs_shape = (NUM_LIDAR_SCANS, 1)
-        
+
         map_name = 'levine'  # Spielberg, example, MoscowRaceway, Catalunya -- need further tuning
         try:
             map_path = os.path.abspath(os.path.join('..', 'maps', map_name))
@@ -45,7 +45,7 @@ class F110Env_Continuous_Planner(gym.Env):
         self.opponent_renderer = Renderer(self.opponent_waypoints)
         self.f110 = F110Env(map=map_path + '/' + map_name + '_map', map_ext='.pgm', num_agents=4)
         # steer, speed
-        
+
         self.action_space = spaces.Box(low=-1 * np.ones((self.T, )), high=np.ones((self.T, ))) # action ==> x-offset
         self.action_size = self.action_space.shape[0]
         # lidar_obs_shape = (NUM_LIDAR_SCANS, 1)
@@ -65,10 +65,10 @@ class F110Env_Continuous_Planner(gym.Env):
     def reset(self, **kwargs):
         if "seed" in kwargs:
             self.seed(kwargs["seed"])
-        main_agent_init_pos = np.array([self.yaml_config['init_pos']])
-        obstacle_1_pos = main_agent_init_pos + np.array([0.2, 2, 0]) # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
-        obstacle_2_pos = np.array([-20.84029965293181,0.46567655312,-1.55179939197938]) + np.array([0.2, 0, 0])
-        obstacle_3_pos = np.array([-1.40574936548874,-0.061268582499999,0.027619392342517]) + np.array([0.2, 0, 0])
+        main_agent_init_pos = np.array([0.999290757730813,8.68367897383209,3.12650034234229])
+        obstacle_1_pos = np.array([-3.39205340374214,8.68292516769166,-3.13498769459861])
+        obstacle_2_pos = np.array([-9.40965852392037,8.70999849135895,-3.14156897279984]) + np.array([0, 0.3, np.pi/2])
+        obstacle_3_pos = np.array([-15.6007500927695,8.70999999892379,-3.14159132914583]) + np.array([0, -0.5, 0])
         init_pos = np.vstack((main_agent_init_pos, obstacle_1_pos, obstacle_2_pos, obstacle_3_pos))
         self.lap_time = 0
         self.dist = 0
@@ -77,7 +77,7 @@ class F110Env_Continuous_Planner(gym.Env):
         obs = self._get_obs(raw_obs)
         self.prev_obs = obs
         return obs
-    
+
     def process_action(self, action):
         pass
 
@@ -132,13 +132,13 @@ class F110Env_Continuous_Planner(gym.Env):
         # else:
         #     reward += 1
         # reward += self.lap_time/1000
-        
+
         # TODO
 
         # TODO: is there anything that prevents the output of the model from given an x-offset in line? and in an approriate length?
 
         return obs, reward, done, info
-    
+
     def _get_reward(self, action, obs, time):
         # reward = -1 # control cost
         reward = 0
@@ -155,7 +155,7 @@ class F110Env_Continuous_Planner(gym.Env):
         # reward 
         min_scan = np.min(obs)
         # print(min_scan)
-        reward += np.clip(min_scan, 0.1, 1.0)/50
+        reward += np.clip(min_scan, 0.1, 1.0)/100
         return reward
 
     def _get_obs(self, raw_obs):
@@ -194,6 +194,6 @@ class F110Env_Continuous_Planner(gym.Env):
         # print("target point:", targetPoint)
         # obs[-2:, :] = targetPoint.reshape(-1, 1)
         return scans
-    
+
     def render(self, mode, **kwargs):
         self.f110.render(mode)

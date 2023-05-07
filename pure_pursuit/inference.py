@@ -84,7 +84,8 @@ if __name__ == "__main__":
         # envs = make_env()()
         # assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
         
-        model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683425737/3_model.pt"
+        # model_path = "/home/oem/Documents/School/ESE_615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683425737/3_model.pt"
+        model_path = f"D:/Penn/ESE 615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683468663/6_model.pt"
 
         agent = Agent(envs).to(device)
         model = torch.load(model_path)

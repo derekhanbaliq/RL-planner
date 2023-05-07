@@ -85,7 +85,7 @@ if __name__ == "__main__":
         # assert isinstance(envs.single_action_space, gym.spaces.Box), "only continuous action space is supported"
 
         model_path = f"D:/Penn/ESE 615/RL-planner/pure_pursuit/runs/no_noise/global_step=667268_reward=586.1904296875_model.pt"
-        model_path = f"D:/Penn/ESE 615/RL-planner/pure_pursuit/runs/F1Tenth-Planner__ppo_continuous__1__1683489918/global_step=775292_reward=564.6980590820312_model.pt"
+        model_path = f"D:/Penn/ESE 615/RL-planner/pure_pursuit/runs/noise/global_step=775292_reward=564.6980590820312_model.pt"
 
         agent = Agent(envs).to(device)
         model = torch.load(model_path)

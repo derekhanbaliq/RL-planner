@@ -13,7 +13,7 @@ from render import Renderer
 from utils import *
 
 NUM_LIDAR_SCANS = 720//10
-SCAN_MAX = 30
+SCAN_MAX = 10
 
 class F110Env_Continuous_Planner(gym.Env):
     def __init__(self, T=1, **kargs):
@@ -66,7 +66,7 @@ class F110Env_Continuous_Planner(gym.Env):
         if "seed" in kwargs:
             self.seed(kwargs["seed"])
         main_agent_init_pos = np.array([self.yaml_config['init_pos']])
-        obstacle_1_pos = main_agent_init_pos + np.array([0.2, 1, 0]) # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
+        obstacle_1_pos = main_agent_init_pos + np.array([0.2, 2, 0]) # np.array([-2.4921703, -5.3199103, 4.1368272]) # TODO generate random starting point
         obstacle_2_pos = np.array([-20.84029965293181,0.46567655312,-1.55179939197938]) - np.array([0.2, 0, 0])
         obstacle_3_pos = np.array([-1.40574936548874,-0.061268582499999,0.027619392342517]) - np.array([-0.2, 0, 0])
         init_pos = np.vstack((main_agent_init_pos, obstacle_1_pos, obstacle_2_pos, obstacle_3_pos))
@@ -101,6 +101,7 @@ class F110Env_Continuous_Planner(gym.Env):
 
         main_speed, main_steering = self.main_controller.control(obs=self.prev_raw_obs, agent=1, offset=rotated_offset[:, 0])
         # opponent_speed, opponent_steering = self.opponent_controller.control(obs=self.prev_raw_obs, agent=2)
+        # print(f"main speed {main_speed}")
         main_agent_steer_speed = np.array([[main_steering, main_speed]])
         obstacle_1_speed = np.array([[0.0, 0.0]])
         obstacle_2_speed = np.array([[0.0, 0.0]])
@@ -118,7 +119,8 @@ class F110Env_Continuous_Planner(gym.Env):
         ''' 
         at time t+1
         '''
-        self.lap_time += time
+        reward = self._get_reward(action, self.prev_obs, time)
+        # self.lap_time += time
         self.prev_raw_obs = raw_obs
         obs = self._get_obs(raw_obs)
         self.prev_obs = obs
@@ -132,24 +134,28 @@ class F110Env_Continuous_Planner(gym.Env):
         # reward += self.lap_time/1000
         
         # TODO
-        reward = self._get_reward(action)
 
         # TODO: is there anything that prevents the output of the model from given an x-offset in line? and in an approriate length?
 
         return obs, reward, done, info
     
-    def _get_reward(self, action):
-        reward = -1 # control cost
+    def _get_reward(self, action, obs, time):
+        # reward = -1 # control cost
+        reward = 0
         if self.f110.collisions[0] == 1:
-            reward -= 100
-        else:
-            reward += 1
-        self.dist += np.linalg.norm(self.currPos[:2] - self.prevPos[:2])
-        vel_reward = (self.dist/self.lap_time)/20
-        reward += vel_reward
-        if self.T > 1:
-            action_diff = np.abs(action[:-1] - action[1:])
-            reward -= self.action_diff_penalty * np.sum(action_diff)/self.T
+            reward -= 10 # 0.2
+        # self.dist += np.linalg.norm(self.currPos[:2] - self.prevPos[:2])
+        # vel_reward = (self.dist/self.lap_time)/20
+        # time_reward = self.lap_time
+        reward += time
+        # if self.T > 1:
+        #     action_diff = np.abs(action[:-1] - action[1:])
+        #     reward -= self.action_diff_penalty * np.sum(action_diff)/self.T
+        # reward -= np.abs(action)/100
+        # reward 
+        min_scan = np.min(obs)
+        # print(min_scan)
+        reward += np.clip(min_scan, 0.1, 1.0)/100
         return reward
 
     def _get_obs(self, raw_obs):

@@ -172,7 +172,7 @@ class F110Env_Continuous_Planner(gym.Env):
         # scans = downsample(scans, NUM_LIDAR_SCANS, 'simple')
         scans = scans[::10]
         # scans = np.clip(scans, 0, SCAN_MAX)
-        sim2real_noise = np.random.uniform(-0.25, 0.25, scans.shape)
+        sim2real_noise = np.random.normal(size=scans.shape)#np.random.uniform(-0.25, 0.25, scans.shape)
         scans = scans + sim2real_noise
         # print(scans.shape)
         # negative_distance, positive_distance = 0, 0

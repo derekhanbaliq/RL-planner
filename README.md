@@ -22,4 +22,4 @@ For virtualenv and docker installation, please check original repo of f1tenth_gy
 
 ## Usage
 
-WIP
+In pure_pursuit folder, run ppo_continuous.py for training, run inference.py for testing.
